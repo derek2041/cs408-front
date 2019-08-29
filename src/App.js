@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavigationBar from './NavigationBar';
+import NoMatch from './NoMatch';
 import logo from './logo.svg';
 import './App.css';
 
@@ -48,6 +49,7 @@ function App() {
             );
           }} />
 
+          <Route component={ NoMatch } />
         </Switch>
       </Router>
     </div>
