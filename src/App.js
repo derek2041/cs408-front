@@ -49,6 +49,15 @@ function App() {
             );
           }} />
 
+          <Route path="/" exact render={ () => {
+            return (
+              <img
+                src="https://s3-media2.fl.yelpcdn.com/bphoto/nA9K90rczbClXXjxmM4Ezg/o.jpg"
+                alt=""
+              />
+            );
+          }} />
+
           <Route component={ NoMatch } />
         </Switch>
       </Router>
