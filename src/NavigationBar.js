@@ -7,8 +7,8 @@ const navbarStyle = { fontFamily: "Exo", width: '100%', height: '25%'};
 const NavigationBar = () => {
 
   return (
-    <Menu size='massive' style={navbarStyle}>
-      <Menu.Item header as={ Link } to='/'>CS408 Project</Menu.Item>
+    <Menu size='massive' style={ navbarStyle }>
+      <Menu.Item header as={ Link } to='/'>Gleam</Menu.Item>
 
       <Dropdown item text='Search'>
         <Dropdown.Menu>
