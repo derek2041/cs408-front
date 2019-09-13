@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 
 const navbarStyle = { fontFamily: 'Raleway', width: '100%', height: '25%'};
 
-const NavigationBar = () => {
-  const [sessionUser, setSessionUser] = useState(null);
+const NavigationBar = ({ sessionUserCallback, sessionUser }) => {
   const [isValidLogin, setIsValidLogin] = useState(true);
   const [isValidRegistration, setIsValidRegistration] = useState(true);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const logoutUser = () => {
-    setSessionUser(null);
+    sessionUserCallback(null);
   }
 
   const authenticateUser = async () => {
@@ -22,7 +21,7 @@ const NavigationBar = () => {
       setIsValidLogin(true);
     }
 
-    setSessionUser("fakeusername");
+    sessionUserCallback("fakeusername");
 
     const settings = {
       method: 'POST',
@@ -47,7 +46,7 @@ const NavigationBar = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: { username: loginUsername, password: loginPassword }
+      body: JSON.stringify({ username: loginUsername, password: loginPassword })
     }
     var response = await fetch(
       `http://...`, settings
