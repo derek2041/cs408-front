@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavigationBar from './NavigationBar';
+import NavigationBar from './pages/NavigationBar';
+import HomePage from './pages/HomePage';
 import NoMatch from './NoMatch';
 import logo from './logo.svg';
 import './App.css';
@@ -12,7 +13,7 @@ function App() {
         <NavigationBar />
 
         <Switch>
-
+          
           <Route path="/one/" exact render={ () => {
             return (
               <img
@@ -49,14 +50,7 @@ function App() {
             );
           }} />
 
-          <Route path="/" exact render={ () => {
-            return (
-              <img
-                src="https://s3-media2.fl.yelpcdn.com/bphoto/nA9K90rczbClXXjxmM4Ezg/o.jpg"
-                alt=""
-              />
-            );
-          }} />
+          <Route path="/" exact component={ HomePage } />
 
           <Route component={ NoMatch } />
         </Switch>
