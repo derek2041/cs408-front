@@ -138,7 +138,7 @@ const NavigationBar = () => {
       );
     } else {
       return (
-        <Button primary style={{ fontFamily: 'Raleway', fontWeight: '600' }} onClick={ () => { logoutUser(); }}>Log Out</Button>
+        <Button as={ Link } to='/' primary style={{ fontFamily: 'Raleway', fontWeight: '600' }} onClick={ () => { logoutUser(); }}>Log Out</Button>
       );
     }
   }
