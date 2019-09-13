@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-const PostContent = () => {
+const CommentList = () => {
   return (
-
+    
   );
 }
 
-export default PostContent;
+export default CommentList;
