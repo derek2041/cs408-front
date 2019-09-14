@@ -82,7 +82,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       return (
         <Modal
           size='large'
-          dimmer={true}
+          dimmer="blurring"
           trigger={
             <Button primary style={{ fontFamily: 'Raleway', fontWeight: '600' }}>Sign In</Button>
           }
