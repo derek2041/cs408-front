@@ -9,25 +9,29 @@ import './App.css';
 
 const App = () => {
 
-  const [sessionUser, setSessionUser] = useState(null);
+  const [sessionUsername, setSessionUsername] = useState(localStorage.getItem('gleam_username'));
+  const [sessionPassword, setSessionPassword] = useState(localStorage.getItem('gleam_password'));
 
-  const sessionUserCallback = (username) => {
-    setSessionUser(username);
+  const sessionUserCallback = (username, password) => {
+    setSessionUsername(username);
+    setSessionPassword(password);
+    localStorage.setItem('gleam_username', username);
+    localStorage.setItem('gleam_password', password);
   }
 
   return (
     <div className="App">
       <Router>
-        <NavigationBar sessionUserCallback={ sessionUserCallback } sessionUser={ sessionUser } />
+        <NavigationBar sessionUserCallback={ sessionUserCallback } sessionUsername={ sessionUsername } />
 
         <Switch>
 
           <Route path="/one/" exact render={ () => {
-            if (sessionUser === null) {
+            if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
               return (
                 <Grid textAlign="center" columns={1}>
                   <Grid.Row style={{ marginTop: '2.5%' }}>
-                    <Message warning={true} style={{ width: '85%', textAlign: 'center' }}>
+                    <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
                       <Message.Header style={{ fontFamily: 'Raleway' }}>Login Required</Message.Header>
                       <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
                         This feature requires you to be logged in. Please log in first.
@@ -47,9 +51,18 @@ const App = () => {
           }} />
 
           <Route path="/two/" exact render={ () => {
-            if (sessionUser === null) {
+            if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
               return (
-                <h1>go login</h1>
+                <Grid textAlign="center" columns={1}>
+                  <Grid.Row style={{ marginTop: '2.5%' }}>
+                    <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
+                      <Message.Header style={{ fontFamily: 'Raleway' }}>Login Required</Message.Header>
+                      <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                        This feature requires you to be logged in. Please log in first.
+                      </p>
+                    </Message>
+                  </Grid.Row>
+                </Grid>
               );
             } else {
               return (
@@ -62,9 +75,18 @@ const App = () => {
           }} />
 
           <Route path="/three/" exact render={ () => {
-            if (sessionUser === null) {
+            if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
               return (
-                <h1>go login</h1>
+                <Grid textAlign="center" columns={1}>
+                  <Grid.Row style={{ marginTop: '2.5%' }}>
+                    <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
+                      <Message.Header style={{ fontFamily: 'Raleway' }}>Login Required</Message.Header>
+                      <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                        This feature requires you to be logged in. Please log in first.
+                      </p>
+                    </Message>
+                  </Grid.Row>
+                </Grid>
               );
             } else {
               return (

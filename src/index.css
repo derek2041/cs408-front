@@ -15,4 +15,11 @@ code {
 input[type="text"] {
   font-family: 'Raleway' !important;
   font-weight: 500;
+  border-radius: 25px !important;
+}
+
+input[type="password"] {
+  font-family: 'Raleway' !important;
+  font-weight: 500;
+  border-radius: 25px !important;
 }
