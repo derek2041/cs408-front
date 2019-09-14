@@ -26,7 +26,7 @@ const App = () => {
 
         <Switch>
 
-          <Route path="/one/" exact render={ () => {
+          <Route path="/my-posts/" exact render={ () => {
             if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
               return (
                 <Grid textAlign="center" columns={1}>
@@ -50,7 +50,7 @@ const App = () => {
             }
           }} />
 
-          <Route path="/two/" exact render={ () => {
+          <Route path="/my-comments/" exact render={ () => {
             if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
               return (
                 <Grid textAlign="center" columns={1}>
@@ -74,7 +74,7 @@ const App = () => {
             }
           }} />
 
-          <Route path="/three/" exact render={ () => {
+          <Route path="/my-bookmarks/" exact render={ () => {
             if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
               return (
                 <Grid textAlign="center" columns={1}>

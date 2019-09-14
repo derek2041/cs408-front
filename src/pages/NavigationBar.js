@@ -82,7 +82,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       return (
         <Modal
           size='large'
-          dimmer='true'
+          dimmer={true}
           trigger={
             <Button primary style={{ fontFamily: 'Raleway', fontWeight: '600' }}>Sign In</Button>
           }
@@ -154,9 +154,9 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
         { renderGreeting() }
         <Dropdown disabled={ (sessionUsername === null) || (sessionUsername === "null") } item text='My Profile'>
           <Dropdown.Menu>
-            <Dropdown.Item as={ Link } to='/one'>My Posts</Dropdown.Item>
-            <Dropdown.Item as={ Link } to='/two'>My Comments</Dropdown.Item>
-            <Dropdown.Item as={ Link } to='/three'>My Bookmarks</Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/my-posts'>My Posts</Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/my-comments'>My Comments</Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/my-bookmarks'>My Bookmarks</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
