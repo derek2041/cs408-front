@@ -120,14 +120,14 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
               </Grid.Row>
 
               <Grid.Row>
-                <Button primary style={{ fontFamily: 'Raleway', width: '120px' }} onClick={ () => {
+                <Button primary style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidRegistration(true); // this is to make the message disappear
                   authenticateUser();
                 }}
                 >
                   Login
                 </Button>
-                <Button style={{ fontFamily: 'Raleway', width: '120px' }} onClick={ () => {
+                <Button style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidLogin(true);  // this is to make the message disappear
                   registerUser();
                 }}
@@ -141,7 +141,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       );
     } else {
       return (
-        <Button as={ Link } to='/' primary style={{ fontFamily: 'Raleway', fontWeight: '600' }} onClick={ () => { logoutUser(); }}>Log Out</Button>
+        <Button as={ Link } to='/' className="logout" primary style={{ fontFamily: 'Raleway', fontWeight: '600' }} onClick={ () => { logoutUser(); }}>Log Out</Button>
       );
     }
   }

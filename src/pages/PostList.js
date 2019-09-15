@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Message, Loader, Pagination, Button, Divider } from 'semantic-ui-react';
+import { Grid, Message, Loader, Pagination, Button, Divider, Icon } from 'semantic-ui-react';
 
 var faker = require("faker");
 
@@ -70,7 +70,12 @@ const PostList = () => {
             </Grid.Column>
 
             <Grid.Column>
-              <Button>View Post</Button>
+              <Button animated style={{ fontSize: '18px', fontFamily: 'Raleway', fontWeight: '500', minWidth: '137px' }}>
+                <Button.Content visible>
+                  <Icon name='arrow right' />
+                </Button.Content>
+                <Button.Content hidden>View Post</Button.Content>
+              </Button>
             </Grid.Column>
           </Grid.Row>
           <Divider style={{ maxWidth: '90vw' }}/>
