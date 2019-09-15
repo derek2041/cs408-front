@@ -61,18 +61,6 @@ const HomePage = ({ isLoggedIn }) => {
           >
             <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>New Post Submission</Header>
 
-            <Grid textAlign="center" columns={1}>
-              <Grid.Row style={{ marginTop: '2.5%' }}>
-                <Message hidden={ true } error={true} style={{ width: '80%', textAlign: 'center' }}>
-                  <Message.Header style={{ fontFamily: 'Raleway' }}>Invalid Submission</Message.Header>
-                  <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
-                    Your post submission is invalid. Please check to make sure both the title and content fields are properly
-                    filled out (i.e. no invalid characters, no empty fields).
-                  </p>
-                </Message>
-              </Grid.Row>
-            </Grid>
-
             <Modal.Content>
               <Grid textAlign="center" columns={1}>
                 <Grid.Row>
