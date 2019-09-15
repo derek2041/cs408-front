@@ -29,6 +29,11 @@ input[type="password"] {
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15) !important;
 }
 
+#submit-post {
+  border-radius: 50px !important;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15) !important;
+}
+
 button {
   border-radius: 50px !important;
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15) !important;

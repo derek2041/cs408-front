@@ -11,6 +11,8 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
   const [loginPassword, setLoginPassword] = useState("");
 
   const logoutUser = () => {
+    setLoginUsername("");
+    setLoginPassword("");
     sessionUserCallback(null, null);
   }
 

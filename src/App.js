@@ -107,7 +107,11 @@ const App = () => {
             );
           }} />
 
-          <Route path="/" exact component={ HomePage } />
+          <Route path="/" exact render={ () => {
+            return (
+              <HomePage isLoggedIn={ (sessionUsername !== null && sessionUsername !== "null" && sessionPassword !== null && sessionPassword !== "null") } />
+            );
+          }} />
 
           <Route component={ NoMatch } />
         </Switch>
