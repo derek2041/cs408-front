@@ -21,13 +21,13 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
     var response;
 
     // if fetch authentication returns OK, sessionUserCallback(loginUsername)
-    if (loginUsername !== "" && loginPassword !== "") {
-      sessionUserCallback(loginUsername, loginPassword);
-      setIsValidLogin(true);
-    } else {
-      sessionUserCallback(null, null);
-      setIsValidLogin(false);
-    }
+    // if (loginUsername !== "" && loginPassword !== "") {
+    //   sessionUserCallback(loginUsername, loginPassword);
+    //   setIsValidLogin(true);
+    // } else {
+    //   sessionUserCallback(null, null);
+    //   setIsValidLogin(false);
+    // }
 
     const settings = {
       method: 'POST',
@@ -36,19 +36,27 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       },
       body: JSON.stringify({ username: loginUsername, password: loginPassword })
     };
+    try {
+      response = await fetch(
+        `http://13.58.109.119:3001/users/login`, settings
+      );
 
-    response = await fetch(
-      `http://13.58.109.119:3001/users/login`, settings
-    );
+      const result = await response.json();
 
-    const result = await response.json();
+      console.log(result);
 
-    console.log(result);
-    // console.log(response);
-    // console.log(response.json());
-    // const result = await response.json();
-    //
-    // console.log(result);
+      if (result && result.status === "success") {
+        sessionUserCallback(loginUsername, loginPassword);
+        setIsValidLogin(true);
+      } else {
+        sessionUserCallback(null, null);
+        setIsValidLogin(false);
+      }
+    } catch (error) {
+      console.log(error);
+      sessionUserCallback(null, null);
+      setIsValidLogin(false);
+    }
   }
 
   const registerUser = async () => {
