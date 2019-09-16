@@ -61,11 +61,12 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
 
   const registerUser = async () => {
     // if fetch registration returns OK, setIsValidRegistration(true);
-    if (loginUsername !== "" && loginPassword !== "") {
-      setIsValidRegistration(true);
-    } else {
-      setIsValidRegistration(false);
-    }
+    // if (loginUsername !== "" && loginPassword !== "") {
+    //   setIsValidRegistration(true);
+    // } else {
+    //   setIsValidRegistration(false);
+    // }
+    var response;
 
     const settings = {
       method: 'POST',
@@ -74,9 +75,27 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       },
       body: JSON.stringify({ username: loginUsername, password: loginPassword })
     }
-    var response = await fetch(
-      `http://...`, settings
-    );
+    try {
+      response = await fetch(
+        `http://13.58.109.119:3001/users/new`, settings
+      );
+
+      const result = await response.json();
+
+      console.log(result);
+
+      if (result && result.status === "success") {
+        sessionUserCallback(loginUsername, loginPassword);
+        setIsValidRegistration(true);
+      } else {
+        sessionUserCallback(null, null);
+        setIsValidRegistration(false);
+      }
+    } catch (error) {
+      console.log(error);
+      sessionUserCallback(null, null);
+      setIsValidRegistration(false);
+    }
   }
 
   const updateLoginUser = (event, data) => {
