@@ -3,7 +3,7 @@ import { Grid, Message, Loader, Pagination, Button, Divider, Icon } from 'semant
 
 var faker = require("faker");
 
-const PostList = () => {
+const PostList = ({ pageType, searchQuery, username, password }) => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(5);
@@ -20,6 +20,41 @@ const PostList = () => {
 
   const fetchPostList = async (pageNumber) => {
     var parsedPostList = [];
+
+    var response;
+
+    const settings = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: username,
+        password: password, pageNumber: pageNumber,
+        searchQuery: searchQuery, pageType: pageType })
+    };
+
+    try {
+      response = await fetch(
+        `http://13.58.109.119:3001/posts`, settings
+      );
+
+      const result = await response.json();
+
+      console.log(result);
+
+      if (result && result.status === "success") {
+        // sessionUserCallback(loginUsername, loginPassword);
+        // setIsValidLogin(true);
+        console.log(result);
+      } else {
+        // sessionUserCallback(null, null);
+        // setIsValidLogin(false);
+      }
+    } catch (error) {
+      console.log(error);
+      // sessionUserCallback(null, null);
+      // setIsValidLogin(false);
+    }
     /*
     const response = await fetch(
       `http://...`

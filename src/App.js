@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavigationBar from './pages/NavigationBar';
 import HomePage from './pages/HomePage';
 import NoMatch from './NoMatch';
+import MyPosts from './pages/MyPosts';
+import MyBookmarks from './pages/MyBookmarks';
 import logo from './logo.svg';
 import './App.css';
 
@@ -42,10 +44,7 @@ const App = () => {
               );
             } else {
               return (
-                <img
-                  src="https://s3-media1.fl.yelpcdn.com/bphoto/AELV_t3DBJaPZCsQOGcsRg/o.jpg"
-                  alt=""
-                />
+                <MyPosts username={sessionUsername} password={sessionPassword} />
               );
             }
           }} />
@@ -90,10 +89,7 @@ const App = () => {
               );
             } else {
               return (
-                <img
-                  src="https://s3-media3.fl.yelpcdn.com/bphoto/dJzIEcoehgN2K1vmZEioHQ/o.jpg"
-                  alt=""
-                />
+                <MyBookmarks username={sessionUsername} password={sessionPassword} />
               );
             }
           }} />
