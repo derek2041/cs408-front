@@ -161,14 +161,14 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
               </Grid.Row>
 
               <Grid.Row>
-                <Button primary disabled={ (loginUsername === "" || loginPassword === "" ) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
+                <Button primary disabled={ (loginUsername === "" || loginPassword === "" || loginUsername.includes(" ") || loginPassword.includes(" ")) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidRegistration(true); // this is to make the message disappear
                   authenticateUser();
                 }}
                 >
                   Login
                 </Button>
-                <Button disabled={ (loginUsername === "" || loginPassword === "" ) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
+                <Button disabled={ (loginUsername === "" || loginPassword === "" || loginUsername.includes(" ") || loginPassword.includes(" ")) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidLogin(true);  // this is to make the message disappear
                   registerUser();
                 }}
