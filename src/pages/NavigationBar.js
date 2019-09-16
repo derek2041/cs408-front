@@ -18,6 +18,8 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
 
   const authenticateUser = async () => {
 
+    var response;
+
     // if fetch authentication returns OK, sessionUserCallback(loginUsername)
     if (loginUsername !== "" && loginPassword !== "") {
       sessionUserCallback(loginUsername, loginPassword);
@@ -32,11 +34,21 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: { username: loginUsername, password: loginPassword }
-    }
-    var response = await fetch(
-      `http://...`, settings
+      body: JSON.stringify({ username: loginUsername, password: loginPassword })
+    };
+
+    response = await fetch(
+      `http://13.58.109.119:3001/users/login`, settings
     );
+
+    const result = await response.json();
+
+    console.log(result);
+    // console.log(response);
+    // console.log(response.json());
+    // const result = await response.json();
+    //
+    // console.log(result);
   }
 
   const registerUser = async () => {
