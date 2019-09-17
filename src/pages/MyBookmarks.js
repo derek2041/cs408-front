@@ -3,8 +3,11 @@ import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider } 
 import { Link } from 'react-router-dom';
 import PostList from './PostList';
 
-const MyBookmarks = ({ username }) => {
+const MyBookmarks = ({ username, password }) => {
   const [searchQuery, setSearchQuery] = useState("");
+
+  const [instanceKey, setInstanceKey] = useState(0);
+  const handleReset = () => setInstanceKey(i => i + 1);
   // const [newPostTitle, updateNewPostTitle] = useState("");
   // const [newPostText, updateNewPostText] = useState("");
 
@@ -13,6 +16,7 @@ const MyBookmarks = ({ username }) => {
     // console.log(event.target.value); this synethetic event is reused for performance reasons (released/nullified afterwards)
     if (event.key === "Enter") {
       setSearchQuery(event.target.value);
+      handleReset();
       console.log("Pressed enter");
       console.log(event.target);
       console.log(event.target.value);
@@ -34,7 +38,7 @@ const MyBookmarks = ({ username }) => {
           />
         </Grid.Row>
       </Grid>
-      <PostList />
+      <PostList key={instanceKey} pageType={"posts"} searchQuery={searchQuery} username={username} password={password} />
     </>
   );
 }

@@ -8,11 +8,15 @@ const HomePage = ({ isLoggedIn }) => {
   const [newPostTitle, updateNewPostTitle] = useState("");
   const [newPostText, updateNewPostText] = useState("");
 
+  const [instanceKey, setInstanceKey] = useState(0);
+  const handleReset = () => setInstanceKey(i => i + 1);
+
   const executeSearch = (event) => {
     console.log(event);
     // console.log(event.target.value); this synethetic event is reused for performance reasons (released/nullified afterwards)
     if (event.key === "Enter") {
       setSearchQuery(event.target.value);
+      handleReset();
       console.log("Pressed enter");
       console.log(event.target);
       console.log(event.target.value);
@@ -88,7 +92,7 @@ const HomePage = ({ isLoggedIn }) => {
           </Modal>
         </Grid.Row>
       </Grid>
-      <PostList />
+      <PostList key={instanceKey} pageType={"posts"} searchQuery={searchQuery} username={""} password={""} />
     </>
   );
 }

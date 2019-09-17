@@ -67,6 +67,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
     /*
     parse json response, setPostList(...)
     */
+    console.log("Loading new dataset!");
     setPostList([{title: faker.commerce.productName(), views: faker.random.number()},
       {title: faker.commerce.productName(), views: faker.random.number()},
       {title: faker.commerce.productName(), views: faker.random.number()},
@@ -83,6 +84,8 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
   }
 
   const renderPostList = () => {
+    console.log("SEARCH QUERY??: " + searchQuery);
+
     // use postList
     if (postList === null) {
       fetchPostList(currentPage);
