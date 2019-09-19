@@ -38,7 +38,7 @@ const MyBookmarks = ({ username, password }) => {
           />
         </Grid.Row>
       </Grid>
-      <PostList key={instanceKey} pageType={"posts"} searchQuery={searchQuery} username={username} password={password} />
+      <PostList key={instanceKey} pageType={"bookmarks"} searchQuery={searchQuery} username={username} password={password} />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider } 
 import { Link } from 'react-router-dom';
 import PostList from './PostList';
 
-const HomePage = ({ isLoggedIn }) => {
+const HomePage = ({ username, password, isLoggedIn }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [newPostTitle, updateNewPostTitle] = useState("");
   const [newPostText, updateNewPostText] = useState("");
@@ -35,8 +35,45 @@ const HomePage = ({ isLoggedIn }) => {
     updateNewPostText(data.value);
   }
 
-  const submitNewPost = () => {
+  const submitNewPost = async () => {
     // send POST to API...
+    var response;
+
+    const settings = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: username,
+        password: password, title: newPostTitle,
+        content: newPostText })
+    };
+
+    try {
+      response = await fetch(
+        `http://13.58.109.119:3001/posts/new`, settings
+      );
+
+      const result = await response.json();
+
+      // console.log(result);
+
+      if (result) {
+        // sessionUserCallback(loginUsername, loginPassword);
+        // setIsValidLogin(true);
+        console.log(result);
+        // setPostList(result);
+      } else {
+        // sessionUserCallback(null, null);
+        // setIsValidLogin(false);
+        // setPostList(null);
+        console.log("[WARN]: no result returned from API")
+      }
+    } catch (error) {
+      console.log(error);
+      // sessionUserCallback(null, null);
+      // setIsValidLogin(false);
+    }
   }
 
   return (
@@ -92,7 +129,7 @@ const HomePage = ({ isLoggedIn }) => {
           </Modal>
         </Grid.Row>
       </Grid>
-      <PostList key={instanceKey} pageType={"posts"} searchQuery={searchQuery} username={""} password={""} />
+      <PostList key={instanceKey} pageType={"home"} searchQuery={searchQuery} username={""} password={""} />
     </>
   );
 }

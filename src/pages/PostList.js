@@ -6,7 +6,7 @@ var faker = require("faker");
 const PostList = ({ pageType, searchQuery, username, password }) => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(5);
+  const [totalPages, setTotalPages] = useState(null);
   const [postList, setPostList] = useState(null);
 
   const handlePageChange = (event, data) => {
@@ -41,14 +41,22 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
       const result = await response.json();
 
       console.log(result);
-
-      if (result && result.status === "success") {
+      console.log(result.data);
+      console.log(result.posts);
+      if (result.data && result.data.length > 0) {
         // sessionUserCallback(loginUsername, loginPassword);
         // setIsValidLogin(true);
-        console.log(result);
+        // console.log(result);
+        setPostList(result.data);
+        console.log("result.count[0]: ");
+        console.log(result.count[0].count);
+
+        console.log(Math.ceil(result.count[0].count));
+        setTotalPages(Math.ceil(result.count[0].count / 10));
       } else {
         // sessionUserCallback(null, null);
         // setIsValidLogin(false);
+        setPostList(null);
       }
     } catch (error) {
       console.log(error);
@@ -68,17 +76,17 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
     parse json response, setPostList(...)
     */
     console.log("Loading new dataset!");
-    setPostList([{title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()},
-      {title: faker.commerce.productName(), views: faker.random.number()}
-    ]);
+    // setPostList([{title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()},
+    //   {title: faker.commerce.productName(), views: faker.random.number()}
+    // ]);
 
     return;
   }
@@ -104,7 +112,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
             </Grid.Column>
 
             <Grid.Column>
-              <p style={{ fontFamily: 'Raleway', fontSize: '20px' }}>{post["views"]} views</p>
+              <p style={{ fontFamily: 'Raleway', fontSize: '20px' }}>{post["post_views"]} views</p>
             </Grid.Column>
 
             <Grid.Column>

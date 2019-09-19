@@ -105,7 +105,11 @@ const App = () => {
 
           <Route path="/" exact render={ () => {
             return (
-              <HomePage isLoggedIn={ (sessionUsername !== null && sessionUsername !== "null" && sessionPassword !== null && sessionPassword !== "null") } />
+              <HomePage
+                username={sessionUsername}
+                password={sessionPassword}
+                isLoggedIn={ (sessionUsername !== null && sessionUsername !== "null" && sessionPassword !== null && sessionPassword !== "null") }
+              />
             );
           }} />
 
