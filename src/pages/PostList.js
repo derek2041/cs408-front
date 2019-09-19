@@ -144,7 +144,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
         <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
         { /*<Loader active={true} inverted={true} size="massive" style={{ background: 'red' }}/> */ }
       </Grid>
-      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+      <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
         <Placeholder.Paragraph>
           <Placeholder.Line length='full'/>
           <Placeholder.Line length='very long'/>
@@ -154,7 +154,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
           <Placeholder.Line length='very short'/>
         </Placeholder.Paragraph>
       </Placeholder>
-      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+      <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
         <Placeholder.Paragraph>
           <Placeholder.Line length='full'/>
           <Placeholder.Line length='very long'/>
@@ -164,7 +164,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
           <Placeholder.Line length='very short'/>
         </Placeholder.Paragraph>
       </Placeholder>
-      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+      <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
         <Placeholder.Paragraph>
           <Placeholder.Line length='full'/>
           <Placeholder.Line length='very long'/>
@@ -174,7 +174,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
           <Placeholder.Line length='very short'/>
         </Placeholder.Paragraph>
       </Placeholder>
-      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+      <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
         <Placeholder.Paragraph>
           <Placeholder.Line length='full'/>
           <Placeholder.Line length='very long'/>
@@ -184,7 +184,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
           <Placeholder.Line length='very short'/>
         </Placeholder.Paragraph>
       </Placeholder>
-      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+      <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
         <Placeholder.Paragraph>
           <Placeholder.Line length='full'/>
           <Placeholder.Line length='very long'/>
