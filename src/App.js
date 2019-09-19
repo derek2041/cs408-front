@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import NoMatch from './NoMatch';
 import MyPosts from './pages/MyPosts';
 import MyBookmarks from './pages/MyBookmarks';
+import PostContent from './pages/PostContent';
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,6 +28,9 @@ const App = () => {
         <NavigationBar sessionUserCallback={ sessionUserCallback } sessionUsername={ sessionUsername } />
 
         <Switch>
+
+        <Route path="/post-view/:postId"  component={PostContent} />
+
 
           <Route path="/my-posts/" exact render={ () => {
             if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {

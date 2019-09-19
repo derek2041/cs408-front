@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Message, Loader, Pagination, Button, Divider, Icon } from 'semantic-ui-react';
+import { Grid, Message, Loader, Pagination, Button, Divider, Icon, Placeholder } from 'semantic-ui-react';
 
 var faker = require("faker");
 
@@ -7,7 +7,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
-  const [postList, setPostList] = useState(null);
+  const [postList, setPostList] = useState(undefined);
 
   const handlePageChange = (event, data) => {
     if (data.totalPages === 0) {
@@ -95,12 +95,15 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
     console.log("SEARCH QUERY??: " + searchQuery);
 
     // use postList
-    if (postList === null) {
-      fetchPostList(currentPage);
-      return (
-        <Loader />
-      );
-    }
+    // if (postList === undefined) {
+    //   fetchPostList(currentPage);
+    //   console.log(">>>>>>>>>>>>>> returning loader");
+    //   return (
+    //     <Grid.Row column={4}>
+    //       <Loader active={true} inverted={true} size="massive" />
+    //     </Grid.Row>
+    //   );
+    // }
 
     var resultJSX = [];
     postList.forEach((post) => {
@@ -130,6 +133,86 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
       resultJSX.push(current);
     });
     return resultJSX;
+  }
+
+  if (postList === undefined) {
+    fetchPostList(currentPage);
+    console.log(">>>>>>>>>>>>>> returning loader");
+    return (
+      <>
+      <Grid textAlign="center" columns={1}>
+        <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
+        { /*<Loader active={true} inverted={true} size="massive" style={{ background: 'red' }}/> */ }
+      </Grid>
+      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+        <Placeholder.Paragraph>
+          <Placeholder.Line length='full'/>
+          <Placeholder.Line length='very long'/>
+          <Placeholder.Line length='medium'/>
+          <Placeholder.Line length='long'/>
+          <Placeholder.Line length='short'/>
+          <Placeholder.Line length='very short'/>
+        </Placeholder.Paragraph>
+      </Placeholder>
+      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+        <Placeholder.Paragraph>
+          <Placeholder.Line length='full'/>
+          <Placeholder.Line length='very long'/>
+          <Placeholder.Line length='medium'/>
+          <Placeholder.Line length='long'/>
+          <Placeholder.Line length='short'/>
+          <Placeholder.Line length='very short'/>
+        </Placeholder.Paragraph>
+      </Placeholder>
+      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+        <Placeholder.Paragraph>
+          <Placeholder.Line length='full'/>
+          <Placeholder.Line length='very long'/>
+          <Placeholder.Line length='medium'/>
+          <Placeholder.Line length='long'/>
+          <Placeholder.Line length='short'/>
+          <Placeholder.Line length='very short'/>
+        </Placeholder.Paragraph>
+      </Placeholder>
+      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+        <Placeholder.Paragraph>
+          <Placeholder.Line length='full'/>
+          <Placeholder.Line length='very long'/>
+          <Placeholder.Line length='medium'/>
+          <Placeholder.Line length='long'/>
+          <Placeholder.Line length='short'/>
+          <Placeholder.Line length='very short'/>
+        </Placeholder.Paragraph>
+      </Placeholder>
+      <Placeholder fluid={true} style={{ marginTop: '3%'}}>
+        <Placeholder.Paragraph>
+          <Placeholder.Line length='full'/>
+          <Placeholder.Line length='very long'/>
+          <Placeholder.Line length='medium'/>
+          <Placeholder.Line length='long'/>
+          <Placeholder.Line length='short'/>
+          <Placeholder.Line length='very short'/>
+        </Placeholder.Paragraph>
+      </Placeholder>
+      </>
+    );
+  }
+
+  if (postList === null) {
+    return (
+      <Grid textAlign="center" columns={1}>
+        <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
+        <Grid.Row style={{ marginTop: '2.5%' }}>
+          <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
+            <Message.Header style={{ fontFamily: 'Raleway' }}>No Posts Found!</Message.Header>
+            <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+              This could mean one of three things: there are no posts that match your search query,
+              your account has no submitted posts, or your account has no posts bookmarked!
+            </p>
+          </Message>
+        </Grid.Row>
+      </Grid>
+    );
   }
 
   return (

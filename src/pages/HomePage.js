@@ -62,6 +62,7 @@ const HomePage = ({ username, password, isLoggedIn }) => {
         // sessionUserCallback(loginUsername, loginPassword);
         // setIsValidLogin(true);
         console.log(result);
+        window.location.href = "http://13.58.109.119:3000/my-posts/";
         // setPostList(result);
       } else {
         // sessionUserCallback(null, null);
@@ -119,7 +120,7 @@ const HomePage = ({ username, password, isLoggedIn }) => {
                 <Divider />
 
                 <Grid.Row>
-                  <Button id="submit-post" as={ Link } to='/my-posts' primary disabled={ (newPostTitle === "" || newPostText === "") } style={{ fontFamily: 'Raleway', width: '200px', fontSize: '18px' }} onClick={ submitNewPost }>
+                  <Button id="submit-post" primary disabled={ (newPostTitle === "" || newPostText === "") } style={{ fontFamily: 'Raleway', width: '200px', fontSize: '18px' }} onClick={ submitNewPost }>
                     Submit Post
                   </Button>
                 </Grid.Row>
