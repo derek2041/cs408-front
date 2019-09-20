@@ -1,52 +1,73 @@
 import React, { useState } from 'react';
-import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider } from 'semantic-ui-react';
+import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider, Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import CommentList from './CommentList';
+// import CommentList from './CommentList';
 
 
 
 const PostContent = ({ username, password }) => {
     const url = window.location.href;
-
-    const [searchQuery, setSearchQuery] = useState("");
+    const [content, setContent] = useState(undefined);
 
     const [instanceKey, setInstanceKey] = useState(0);
     const handleReset = () => setInstanceKey(i => i + 1);
-    // const [newPostTitle, updateNewPostTitle] = useState("");
-    // const [newPostText, updateNewPostText] = useState("");
 
-    const executeSearch = (event) => {
-      console.log(event);
-      // console.log(event.target.value); this synethetic event is reused for performance reasons (released/nullified afterwards)
-      if (event.key === "Enter") {
-        setSearchQuery(event.target.value);
-        handleReset();
-        console.log("Pressed enter");
-        console.log(event.target);
-        console.log(event.target.value);
-      } else {
+    const postId = url.slice(url.lastIndexOf(':')+1);
 
+
+    const fetchCommentList = async (postId) => {
+
+      var response;
+
+      const settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: postId })
+      };
+
+      try {
+        response = await fetch(
+          `http://13.58.109.119:3001/posts/view`, settings
+        );
+
+        const result = await response.json();
+
+        console.log(result);
+
+        setContent(result)
+      } catch (error) {
+        console.log(error);
       }
-    // }
 
+
+      /*
+      parse json response, setPostList(...)
+      */
+      console.log("Loading new dataset!");
+      return;
+    }
+
+    // fetchCommentList(postId);
+    if (content === undefined) {
+      fetchCommentList(postId);
+      return (
+        <h1>temp</h1>
+      );
+    }
 
     return (
-      <>
         <Grid textAlign="center" columns={1}>
-          <Grid.Row columns={1}>
-            <Input
-              id="search-bar"
-              icon={{ name: 'search', circular: true, link: false}}
-              placeholder="Search for post..."
-              onKeyPress={ executeSearch }
-              style={{ width: '50%', fontSize: '24px', marginTop: '1%' }}
-            />
-          </Grid.Row>
+          <Container text style={{ marginTop: '3%', width: '80%', borderStyle: 'solid', borderColor: 'yellow'}}>
+            <Header as='h2'>{content.title}</Header>
+            <p>
+              {content.content}
+            </p>
+          </Container>
         </Grid>
-        <CommentList key={instanceKey} pageType={"posts"} searchQuery={searchQuery} username={username} password={password} />
-      </>
     );
-  }
 }
+
 
 export default PostContent;

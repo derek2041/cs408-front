@@ -42,7 +42,9 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
 
       console.log(result);
       console.log(result.data);
-      console.log(result.posts);
+
+      console.log(result.data[0]);
+
       if (result.data && result.data.length > 0) {
         // sessionUserCallback(loginUsername, loginPassword);
         // setIsValidLogin(true);
@@ -119,7 +121,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
             </Grid.Column>
 
             <Grid.Column>
-              <Button animated style={{ fontSize: '18px', fontFamily: 'Raleway', fontWeight: '500', minWidth: '137px' }}>
+              <Button onClick={ () => {window.location.href="/post-view/:" + post["id"]} } animated style={{ fontSize: '18px', fontFamily: 'Raleway', fontWeight: '500', minWidth: '137px' }}>
                 <Button.Content visible>
                   <Icon name='arrow right' />
                 </Button.Content>
