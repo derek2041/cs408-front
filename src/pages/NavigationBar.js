@@ -122,6 +122,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
     if (sessionUsername === null || sessionUsername === "null") {
       return (
         <Modal
+          id="login-modal"
           size='large'
           dimmer="blurring"
           trigger={
