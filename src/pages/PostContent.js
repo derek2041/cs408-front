@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider, Container } from 'semantic-ui-react';
+import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider, Container, Placeholder } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
 
@@ -53,7 +53,58 @@ const PostContent = ({ username, password }) => {
     if (content === undefined) {
       fetchCommentList(postId);
       return (
-        <h1>temp</h1>
+        <>
+          <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+            <Placeholder.Paragraph>
+              <Placeholder.Line length='full'/>
+              <Placeholder.Line length='very long'/>
+              <Placeholder.Line length='medium'/>
+              <Placeholder.Line length='long'/>
+              <Placeholder.Line length='short'/>
+              <Placeholder.Line length='very short'/>
+            </Placeholder.Paragraph>
+          </Placeholder>
+          <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+            <Placeholder.Paragraph>
+              <Placeholder.Line length='full'/>
+              <Placeholder.Line length='very long'/>
+              <Placeholder.Line length='medium'/>
+              <Placeholder.Line length='long'/>
+              <Placeholder.Line length='short'/>
+              <Placeholder.Line length='very short'/>
+            </Placeholder.Paragraph>
+          </Placeholder>
+          <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+            <Placeholder.Paragraph>
+              <Placeholder.Line length='full'/>
+              <Placeholder.Line length='very long'/>
+              <Placeholder.Line length='medium'/>
+              <Placeholder.Line length='long'/>
+              <Placeholder.Line length='short'/>
+              <Placeholder.Line length='very short'/>
+            </Placeholder.Paragraph>
+          </Placeholder>
+          <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+            <Placeholder.Paragraph>
+              <Placeholder.Line length='full'/>
+              <Placeholder.Line length='very long'/>
+              <Placeholder.Line length='medium'/>
+              <Placeholder.Line length='long'/>
+              <Placeholder.Line length='short'/>
+              <Placeholder.Line length='very short'/>
+            </Placeholder.Paragraph>
+          </Placeholder>
+          <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+            <Placeholder.Paragraph>
+              <Placeholder.Line length='full'/>
+              <Placeholder.Line length='very long'/>
+              <Placeholder.Line length='medium'/>
+              <Placeholder.Line length='long'/>
+              <Placeholder.Line length='short'/>
+              <Placeholder.Line length='very short'/>
+            </Placeholder.Paragraph>
+          </Placeholder>
+        </>
       );
     }
 

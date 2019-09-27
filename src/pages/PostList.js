@@ -139,7 +139,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
 
   if (postList === undefined) {
     fetchPostList(currentPage);
-    console.log(">>>>>>>>>>>>>> returning loader");
+    // console.log(">>>>>>>>>>>>>> returning loader");
     return (
       <>
       <Grid textAlign="center" columns={1}>

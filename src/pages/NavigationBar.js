@@ -143,7 +143,9 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
               <Message hidden={ isValidRegistration } error={true} style={{ width: '80%', textAlign: 'center' }}>
                 <Message.Header style={{ fontFamily: 'Raleway' }}>Registration Failed</Message.Header>
                 <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
-                  There was an error trying to create an account with these credentials. Please try another combination!
+                  There was an error trying to create an account with these credentials. Either the username
+                  has already been taken or your password is less than 6 characters in length or your password
+                  contains non-alphanumeric characters. Please try another combination!
                 </p>
               </Message>
             </Grid.Row>
@@ -171,7 +173,12 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
                 </Button>
                 <Button disabled={ (loginUsername === "" || loginPassword === "" || loginUsername.includes(" ") || loginPassword.includes(" ")) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidLogin(true);  // this is to make the message disappear
-                  registerUser();
+                  var regex = /[^a-zA-Z0-9]/g;
+                  if (loginPassword.length < 6 || loginPassword.match(regex)) {
+                    setIsValidRegistration(false);
+                  } else {
+                    registerUser();
+                  }
                 }}
                 >
                   Register
