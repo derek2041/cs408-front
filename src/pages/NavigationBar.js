@@ -190,7 +190,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       );
     } else {
       return (
-        <Button as={ Link } to='/' className="logout" primary style={{ fontFamily: 'Raleway', fontWeight: '600' }} onClick={ () => { logoutUser(); }}>Log Out</Button>
+        <Button className="logout" primary style={{ fontFamily: 'Raleway', fontWeight: '600' }} onClick={ () => { logoutUser(); }}>Log Out</Button>
       );
     }
   }

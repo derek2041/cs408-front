@@ -29,7 +29,11 @@ const App = () => {
 
         <Switch>
 
-        <Route path="/post-view/:postId"  component={PostContent} />
+        <Route path="/post-view/:postId" render={() => {
+          return (
+            <PostContent username={sessionUsername} password={sessionPassword} />
+          );
+        }} />
 
 
           <Route path="/my-posts/" exact render={ () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Header, Container, Placeholder } from 'semantic-ui-react';
+import { Grid, Header, Container, Placeholder, TextArea, Divider, Button, Popup } from 'semantic-ui-react';
 import PostComments from './PostComments';
 // import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
@@ -9,12 +9,16 @@ import PostComments from './PostComments';
 const PostContent = ({ username, password }) => {
     const url = window.location.href;
     const [content, setContent] = useState(undefined);
+    const [newCommentText, setNewCommentText] = useState("");
 
     // const [instanceKey, setInstanceKey] = useState(0);
     // const handleReset = () => setInstanceKey(i => i + 1);
 
     const postId = url.slice(url.lastIndexOf(':')+1);
 
+    const handleTextChange = (event, data) => {
+      setNewCommentText(data.value)
+    }
 
     const fetchPostBody = async (postId) => {
 
@@ -48,6 +52,26 @@ const PostContent = ({ username, password }) => {
       */
       console.log("Loading new dataset!");
       return;
+    }
+
+    const submitComment = async () => {
+      // var response;
+      //
+      // const settings = {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({ post_id: postId, comment: newCommentText, username: username, password: password })
+      // };
+      //
+      // response = await fetch(
+      //   `http://13.58.109.119:3001/posts/view`, settings
+      // );
+      //
+      // const result = await response.json();
+      //
+      // console.log(result);
     }
 
     // fetchPostBody(postId);
@@ -109,6 +133,8 @@ const PostContent = ({ username, password }) => {
       );
     }
 
+    console.log("USERNAME>>>" + username);
+
     return (
       <>
         <Grid textAlign="center" columns={1}>
@@ -118,6 +144,24 @@ const PostContent = ({ username, password }) => {
               {content.content}
             </p>
           </Container>
+        </Grid>
+
+        <Grid textAlign="center" columns={1}>
+          <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
+          <Grid.Row>
+            <TextArea id="content" placeholder='New Comment...' style={{ maxWidth: '75%', minWidth: '75%', minHeight: '150px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+             onChange={ handleTextChange } />
+          </Grid.Row>
+
+          <Grid.Row>
+            <Button primary
+              disabled={ username === null || username === "null" }
+              onClick={ submitComment }
+              style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px', minWidth: '175px' }}
+            >
+              Add Comment
+            </Button>
+          </Grid.Row>
         </Grid>
 
         <PostComments postId={ postId } />
