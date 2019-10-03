@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider, Container, Placeholder } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Grid, Header, Container, Placeholder } from 'semantic-ui-react';
+// import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
 
 
@@ -9,8 +9,8 @@ const PostContent = ({ username, password }) => {
     const url = window.location.href;
     const [content, setContent] = useState(undefined);
 
-    const [instanceKey, setInstanceKey] = useState(0);
-    const handleReset = () => setInstanceKey(i => i + 1);
+    // const [instanceKey, setInstanceKey] = useState(0);
+    // const handleReset = () => setInstanceKey(i => i + 1);
 
     const postId = url.slice(url.lastIndexOf(':')+1);
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Grid, Message, Loader, Pagination, Button, Divider, Icon, Placeholder } from 'semantic-ui-react';
+import { Grid, Message, Pagination, Button, Divider, Icon, Placeholder } from 'semantic-ui-react';
 
-var faker = require("faker");
+// var faker = require("faker");
 
 const PostList = ({ pageType, searchQuery, username, password }) => {
-  const [hasLoaded, setHasLoaded] = useState(false);
+  // const [hasLoaded, setHasLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const [postList, setPostList] = useState(undefined);
@@ -13,13 +13,13 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
     if (data.totalPages === 0) {
       return;
     }
-    setHasLoaded(false);
+    // setHasLoaded(false);
     setCurrentPage(data.activePage);
     fetchPostList(data.activePage);
   }
 
   const fetchPostList = async (pageNumber) => {
-    var parsedPostList = [];
+    // var parsedPostList = [];
 
     var response;
 

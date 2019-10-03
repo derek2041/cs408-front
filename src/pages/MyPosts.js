@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, Input, Button, Icon, Modal, TextArea, Header, Message, Divider } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Grid, Input } from 'semantic-ui-react';
+// import { Link } from 'react-router-dom';
 import PostList from './PostList';
 
 const MyPosts = ({ username, password }) => {

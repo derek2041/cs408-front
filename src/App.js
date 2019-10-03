@@ -7,7 +7,7 @@ import NoMatch from './NoMatch';
 import MyPosts from './pages/MyPosts';
 import MyBookmarks from './pages/MyBookmarks';
 import PostContent from './pages/PostContent';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 const App = () => {

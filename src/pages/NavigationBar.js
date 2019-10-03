@@ -129,7 +129,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
             <Button primary style={{ fontFamily: 'Raleway', fontWeight: '600' }}>Sign In</Button>
           }
         >
-          <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Create an Account</Header>
+          <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Account Login</Header>
 
           <Grid textAlign="center" columns={1}>
             <Grid.Row style={{ marginTop: '2.5%' }}>
