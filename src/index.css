@@ -41,7 +41,6 @@ button {
 
 #search-bar {
   border: 1px solid #dfe1e5 !important;
-  z-index: 3;
 }
 
 #search-bar:hover {
