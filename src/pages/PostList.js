@@ -218,7 +218,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
   }
 
   return (
-    <Grid textAlign="center" columns={1} style={{ height: '100vh'}}>
+    <Grid textAlign="center" columns={1}>
       <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
       <Grid.Row columns={1}>
         <Pagination activePage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} style={{ height: 'max-content' }}/>

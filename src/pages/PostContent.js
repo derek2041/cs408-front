@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Header, Container, Placeholder } from 'semantic-ui-react';
+import PostComments from './PostComments';
 // import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
 
@@ -15,7 +16,7 @@ const PostContent = ({ username, password }) => {
     const postId = url.slice(url.lastIndexOf(':')+1);
 
 
-    const fetchCommentList = async (postId) => {
+    const fetchPostBody = async (postId) => {
 
       var response;
 
@@ -49,9 +50,9 @@ const PostContent = ({ username, password }) => {
       return;
     }
 
-    // fetchCommentList(postId);
+    // fetchPostBody(postId);
     if (content === undefined) {
-      fetchCommentList(postId);
+      fetchPostBody(postId);
       return (
         <>
           <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
@@ -109,14 +110,18 @@ const PostContent = ({ username, password }) => {
     }
 
     return (
+      <>
         <Grid textAlign="center" columns={1}>
-          <Container text style={{ marginTop: '3%', width: '80%', borderStyle: 'solid', borderColor: 'yellow'}}>
-            <Header as='h2'>{content.title}</Header>
-            <p>
+          <Container id="post-content" text>
+            <Header as='h2' style={{ marginTop: '3%', marginBottom: '3%', fontFamily: 'Raleway', color: 'rgb(33, 133, 208)' }}>{content.title}</Header>
+            <p style={{ marginTop: '3%', marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px' }}>
               {content.content}
             </p>
           </Container>
         </Grid>
+
+        <PostComments postId={ postId } />
+      </>
     );
 }
 

@@ -53,3 +53,28 @@ button {
   box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28) !important;
   border-color: rgba(223,225,229,0);
 }
+
+#post-content {
+  box-shadow: 0 1px 3px 0 rgba(32,33,36,0.28) !important;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  width: 75% !important;
+  max-width: 100% !important;
+  border-style: solid;
+  border-color: #dfe1e5;
+  background: white;
+  border-radius: 25px;
+  border-width: 1px;
+}
+
+.comment {
+  max-width: 75%;
+  width: 75%;
+  font-family: 'Raleway';
+  font-size: 20px;
+  font-weight: 500;
+}
+
+span[class="text"] {
+  color: rgb(33, 133, 208);
+}
