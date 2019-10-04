@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Header, Container, Placeholder, TextArea, Divider, Button, Popup } from 'semantic-ui-react';
+import { Grid, Header, Container, Placeholder, TextArea, Divider, Button, Popup, Icon, Modal, Input } from 'semantic-ui-react';
 import PostComments from './PostComments';
 // import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
@@ -9,7 +9,13 @@ import PostComments from './PostComments';
 const PostContent = ({ username, password }) => {
     const url = window.location.href;
     const [content, setContent] = useState(undefined);
+    const [isCreator, setIsCreator] = useState(undefined);
+    const [isBookmarked, setIsBookmarked] = useState(undefined);
     const [newCommentText, setNewCommentText] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const [editedPostTitle, setEditedPostTitle] = useState("");
+    const [editedPostText, setEditedPostText] = useState("");
 
     // const [instanceKey, setInstanceKey] = useState(0);
     // const handleReset = () => setInstanceKey(i => i + 1);
@@ -17,7 +23,200 @@ const PostContent = ({ username, password }) => {
     const postId = url.slice(url.lastIndexOf(':')+1);
 
     const handleTextChange = (event, data) => {
-      setNewCommentText(data.value)
+      setNewCommentText(data.value);
+    }
+
+    const handleEditTextChange = (event, data) => {
+      setEditedPostText(data.value);
+    }
+
+    const handleEditTitleChange = (event, data) => {
+      setEditedPostTitle(data.value);
+    }
+
+    const saveEditedPost = () => {
+      console.log("Submitting changes to post.");
+      console.log(editedPostText);
+    }
+
+    const toggleBookmark = async () => {
+      var response;
+
+      if (isBookmarked === true) {
+        const settings = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ post_id: postId, username: username, password: password, bookmark: false })
+        };
+
+        // try {
+        //   response = await fetch(
+        //     `http://13.58.109.119:3001/posts/view`, settings
+        //   );
+        //
+        //   const result = await response.json();
+        //
+        //   console.log(result);
+        //
+        //   setIsBookmarked(false);
+        //
+        // } catch (error) {
+        //   console.log(error);
+        // }
+        setIsBookmarked(false);
+      } else {
+        const settings = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ post_id: postId, username: username, password: password, bookmark: true })
+        };
+
+        // try {
+        //   response = await fetch(
+        //     `http://13.58.109.119:3001/posts/view`, settings
+        //   );
+        //
+        //   const result = await response.json();
+        //
+        //   console.log(result);
+        //
+        //   setIsBookmarked(true);
+        //
+        // } catch (error) {
+        //   console.log(error);
+        // }
+        setIsBookmarked(true);
+      }
+    }
+
+    const renderBookmarkButton = () => {
+      if (username === null || username === "null") {
+        console.log("Rendering disabled bookmark!");
+        return (
+          <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+            <Icon name='bookmark' />
+          </Button>
+        );
+      }
+      if (isBookmarked === true) {
+        return (
+          <Popup
+            content="Remove from Bookmarks"
+            mouseEnterDelay={500}
+            position='top center'
+            on='hover'
+            style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
+            trigger={
+              <Button icon onClick={ toggleBookmark } style={{ background: 'limegreen', height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+                <Icon name='bookmark' />
+              </Button>
+            }
+          />
+        );
+      } else {
+        return (
+          <Popup
+            content="Add to Bookmarks"
+            mouseEnterDelay={500}
+            position='top center'
+            on='hover'
+            style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
+            trigger={
+              <Button icon onClick={ toggleBookmark } style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+                <Icon name='bookmark' />
+              </Button>
+            }
+          />
+        );
+      }
+
+      // return (
+      //   <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+      //     disabled={ username === null || username === "null" }
+      //   >
+      //     <Icon name='bookmark' />
+      //   </Button>
+      // );
+    }
+
+    const renderEditButton = () => {
+      if (username === null || username === "null") {
+        return (
+          <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+            <Icon name='edit' />
+          </Button>
+        );
+      }
+      if (isCreator === true) {
+        return (
+          <>
+            <Modal open={ modalVisible }
+              size="large"
+              dimmer="blurring"
+              closeOnDimmerClick={ true }
+              closeOnDocumentClick={ true }
+              onClose={ () => { setModalVisible(false); } }
+            >
+              <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Edit Post</Header>
+
+              <Modal.Content>
+                <Grid textAlign="center" columns={1}>
+                  <Grid.Row>
+                    <Input id="title" placeholder="Edit Post Title" defaultValue={content.title} style={{ width: '85%', maxHeight: '45px', fontSize: '20px' }}
+                     onChange={ handleEditTitleChange }/>
+                  </Grid.Row>
+
+                  <Divider />
+
+                  <Grid.Row>
+                    <TextArea id="content" placeholder='Edit Post Text' defaultValue={content.content} style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+                     onChange={ handleEditTextChange } />
+                  </Grid.Row>
+
+                  <Divider />
+
+                  <Grid.Row>
+                    <Button id="submit-post" primary disabled={ (editedPostTitle === "" || editedPostText === "") } style={{ fontFamily: 'Raleway', width: '200px', fontSize: '18px' }} onClick={ saveEditedPost }>
+                      Save Post
+                    </Button>
+                  </Grid.Row>
+                </Grid>
+              </Modal.Content>
+            </Modal>
+            <Popup
+              content="Edit Post"
+              mouseEnterDelay={500}
+              position='top center'
+              on='hover'
+              style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
+              trigger={
+                <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+                  onClick={ () => { setModalVisible(true); } }>
+                  <Icon name='edit' />
+                </Button>
+              }
+            />
+          </>
+        );
+      } else {
+        return (
+          <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+            <Icon name='edit' />
+          </Button>
+        );
+      }
+
+      // return (
+      //   <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+      //     disabled={ username === null || username === "null" }
+      //   >
+      //     <Icon name='edit' />
+      //   </Button>
+      // );
     }
 
     const fetchPostBody = async (postId) => {
@@ -41,7 +240,15 @@ const PostContent = ({ username, password }) => {
 
         console.log(result);
 
-        setContent(result)
+        setContent(result);
+        setEditedPostTitle(result.title);
+        setEditedPostText(result.content);
+
+        setIsBookmarked(true);
+        setIsCreator(true);
+        // setContent(result.content);
+        // setIsCreator(result.creator);
+        // setIsBookmarked(result.bookmarked);
       } catch (error) {
         console.log(error);
       }
@@ -139,11 +346,19 @@ const PostContent = ({ username, password }) => {
       <>
         <Grid textAlign="center" columns={1}>
           <Container id="post-content" text>
-            <Header as='h2' style={{ marginTop: '3%', marginBottom: '3%', fontFamily: 'Raleway', color: 'rgb(33, 133, 208)' }}>{content.title}</Header>
-            <p style={{ marginTop: '3%', marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px' }}>
+            <Header as='h2' style={{ marginTop: '3%', fontFamily: 'Raleway', color: 'rgb(33, 133, 208)' }}>{content.title}</Header>
+            <p style={{ marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px' }}>
               {content.content}
             </p>
           </Container>
+
+          <Grid.Row style={{ marginTop: '1%' }}>
+
+            { renderBookmarkButton() }
+
+            { renderEditButton() }
+
+          </Grid.Row>
         </Grid>
 
         <Grid textAlign="center" columns={1}>
@@ -155,7 +370,7 @@ const PostContent = ({ username, password }) => {
 
           <Grid.Row>
             <Button primary
-              disabled={ username === null || username === "null" }
+              disabled={ username === null || username === "null" || newCommentText.length < 1 }
               onClick={ submitComment }
               style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px', minWidth: '175px' }}
             >
