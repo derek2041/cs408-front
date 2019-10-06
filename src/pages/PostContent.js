@@ -376,23 +376,25 @@ const PostContent = ({ username, password }) => {
     }
 
     const submitComment = async () => {
-      // var response;
-      //
-      // const settings = {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({ post_id: postId, comment: newCommentText, username: username, password: password })
-      // };
-      //
-      // response = await fetch(
-      //   `http://13.58.109.119:3001/posts/view`, settings
-      // );
-      //
-      // const result = await response.json();
-      //
-      // console.log(result);
+      var response;
+
+      const settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: postId, content: newCommentText, username: username, password: password })
+      };
+
+      response = await fetch(
+        `http://13.58.109.119:3001/comments/new`, settings
+      );
+
+      const result = await response.json();
+
+      console.log(result);
+
+      window.location.reload();
     }
 
     // fetchPostBody(postId);
@@ -495,7 +497,7 @@ const PostContent = ({ username, password }) => {
           </Grid.Row>
         </Grid>
 
-        <PostComments postId={ postId } />
+        <PostComments postId={ postId } username={ username } password={ password } />
       </>
     );
 }
