@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
+import { Grid, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
 
 var faker = require('faker');
 
@@ -23,6 +23,9 @@ const PostComments = ({ postId, username, password }) => {
   const [commentList, setCommentList] = useState(undefined);
   const [filterType, setFilterType] = useState("Most Recent");
   const [showDelete, setShowDelete] = useState(false);
+  const [editCommentText, setEditCommentText] = useState("");
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePageChange = (event, data) => {
     if (data.totalPages === 0) {
@@ -31,6 +34,10 @@ const PostComments = ({ postId, username, password }) => {
     // setHasLoaded(false);
     setCurrentPage(data.activePage);
     fetchCommentList(data.activePage, filterType);
+  }
+
+  const handleEditTextChange = (event, data) => {
+    setEditCommentText(data.value);
   }
 
   const handleFilterChange = (event, data) => {
@@ -165,6 +172,7 @@ const PostComments = ({ postId, username, password }) => {
 
             <Grid.Column>
               { renderDeleteButton(comment["username"], comment["id"]) }
+              { renderEditButton(comment["username"], comment["id"], comment["content"]) }
             </Grid.Column>
           </Grid.Row>
           <Divider style={{ maxWidth: '90vw' }}/>
@@ -193,6 +201,90 @@ const PostComments = ({ postId, username, password }) => {
             onCancel={ () => { setShowDelete(false); } }
             onConfirm={ () => { submitDelete(commentId) }}
             style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+          />
+        </>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  const saveEditedComment = async (commentId) => {
+    var response;
+
+    const settings = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: username, password: password, comment_id: commentId, content: editCommentText })
+    };
+
+    try {
+      response = await fetch(
+        `http://13.58.109.119:3001/comments/edit`, settings
+      );
+
+      const result = await response.json();
+
+      // console.log(result);
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    window.location.reload();
+  }
+
+  const renderEditButton = (inputUsername, commentId, content) => {
+    if (inputUsername === username) {
+      return (
+        <>
+          <Modal open={ modalVisible }
+            size="large"
+            dimmer="blurring"
+            closeOnDimmerClick={ true }
+            closeOnDocumentClick={ true }
+            onOpen={ () => { setEditCommentText(content); } }
+            onClose={ () => { setModalVisible(false); setEditCommentText(""); } }
+          >
+            <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Edit Comment</Header>
+
+            <Modal.Content>
+              <Grid textAlign="center" columns={1}>
+
+                <Grid.Row>
+                  <TextArea id="content" placeholder='Edit Comment' defaultValue={ content } style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+                   onChange={ handleEditTextChange } />
+                </Grid.Row>
+
+                <Divider />
+
+                <Grid.Row>
+                  <Button id="submit-post"
+                    primary
+                    disabled={ editCommentText === "" }
+                    style={{ fontFamily: 'Raleway', width: '200px', fontSize: '18px' }}
+                    onClick={ () => { saveEditedComment(commentId, content) }}
+                  >
+                    Save Comment
+                  </Button>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
+          </Modal>
+          <Popup
+            content="Edit Comment"
+            mouseEnterDelay={500}
+            position='top center'
+            on='hover'
+            style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
+            trigger={
+              <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+                onClick={ () => { setModalVisible(true); } }>
+                <Icon name='edit' />
+              </Button>
+            }
           />
         </>
       );
