@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Header, Container, Placeholder, TextArea, Divider, Button, Popup, Icon, Modal, Input } from 'semantic-ui-react';
+import { Grid, Header, Container, Placeholder, TextArea, Divider, Button, Popup, Icon, Modal, Input, Confirm } from 'semantic-ui-react';
 import PostComments from './PostComments';
 // import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
@@ -13,6 +13,7 @@ const PostContent = ({ username, password }) => {
     const [isBookmarked, setIsBookmarked] = useState(undefined);
     const [newCommentText, setNewCommentText] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const [editedPostTitle, setEditedPostTitle] = useState("");
     const [editedPostText, setEditedPostText] = useState("");
@@ -34,15 +35,69 @@ const PostContent = ({ username, password }) => {
       setEditedPostTitle(data.value);
     }
 
-    const saveEditedPost = () => {
+    const submitDelete = async () => {
+      var response;
+
+      const settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: postId, username: username, password: password })
+      };
+
+      try {
+        response = await fetch(
+          `http://13.58.109.119:3001/posts/delete`, settings
+        );
+
+        const result = await response.json();
+
+        console.log(result);
+
+      } catch (error) {
+        console.log(error);
+      }
+
+      window.location.href = "http://13.58.109.119:3000/";
+    }
+
+    const saveEditedPost = async () => {
       console.log("Submitting changes to post.");
       console.log(editedPostText);
+
+      var response;
+
+      const settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: postId, username: username, password: password, title: editedPostTitle, content: editedPostText })
+      };
+
+      try {
+        response = await fetch(
+          `http://13.58.109.119:3001/posts/edit`, settings
+        );
+
+        const result = await response.json();
+
+        console.log(result);
+
+      } catch (error) {
+        console.log(error);
+      }
+
+      window.location.reload();
     }
 
     const toggleBookmark = async () => {
       var response;
 
       if (isBookmarked === true) {
+        setIsBookmarked(false);
+
         const settings = {
           method: 'POST',
           headers: {
@@ -51,22 +106,22 @@ const PostContent = ({ username, password }) => {
           body: JSON.stringify({ post_id: postId, username: username, password: password, bookmark: false })
         };
 
-        // try {
-        //   response = await fetch(
-        //     `http://13.58.109.119:3001/posts/view`, settings
-        //   );
-        //
-        //   const result = await response.json();
-        //
-        //   console.log(result);
-        //
-        //   setIsBookmarked(false);
-        //
-        // } catch (error) {
-        //   console.log(error);
-        // }
-        setIsBookmarked(false);
+        try {
+          response = await fetch(
+            `http://13.58.109.119:3001/bookmarks/delete`, settings
+          );
+
+          const result = await response.json();
+
+          console.log(result);
+
+        } catch (error) {
+          console.log(error);
+        }
+        // setIsBookmarked(false);
       } else {
+        setIsBookmarked(true);
+
         const settings = {
           method: 'POST',
           headers: {
@@ -74,6 +129,19 @@ const PostContent = ({ username, password }) => {
           },
           body: JSON.stringify({ post_id: postId, username: username, password: password, bookmark: true })
         };
+
+        try {
+          response = await fetch(
+            `http://13.58.109.119:3001/bookmarks/new`, settings
+          );
+
+          const result = await response.json();
+
+          console.log(result);
+
+        } catch (error) {
+          console.log(error);
+        }
 
         // try {
         //   response = await fetch(
@@ -91,6 +159,52 @@ const PostContent = ({ username, password }) => {
         // }
         setIsBookmarked(true);
       }
+    }
+
+    const renderDeleteButton = () => {
+      if (username === null || username === "null") {
+        return (
+          <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+            <Icon name='delete' />
+          </Button>
+        );
+      }
+
+      if (isCreator === true) {
+        return (
+          <>
+            <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+              onClick={ () => { setShowDelete(true); }}
+            >
+              <Icon name='delete' />
+            </Button>
+
+            <Confirm
+              content='Are you sure you want to delete this post?'
+              confirmButton='Yes'
+              cancelButton='No'
+              open={ showDelete === true }
+              onCancel={ () => { setShowDelete(false); } }
+              onConfirm={ submitDelete }
+              style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+            />
+          </>
+        );
+      } else {
+        return (
+          <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
+            <Icon name='delete' />
+          </Button>
+        );
+      }
+
+      // return (
+      //   <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+      //     disabled={ username === null || username === "null" }
+      //   >
+      //     <Icon name='edit' />
+      //   </Button>
+      // );
     }
 
     const renderBookmarkButton = () => {
@@ -228,7 +342,7 @@ const PostContent = ({ username, password }) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ post_id: postId })
+        body: JSON.stringify({ post_id: postId, username: username, password: password })
       };
 
       try {
@@ -240,12 +354,12 @@ const PostContent = ({ username, password }) => {
 
         console.log(result);
 
-        setContent(result);
-        setEditedPostTitle(result.title);
-        setEditedPostText(result.content);
+        setContent(result.post);
+        setEditedPostTitle(result.post.title);
+        setEditedPostText(result.post.content);
 
-        setIsBookmarked(true);
-        setIsCreator(true);
+        setIsBookmarked(result.metadata.bookmarked);
+        setIsCreator(result.metadata.creator);
         // setContent(result.content);
         // setIsCreator(result.creator);
         // setIsBookmarked(result.bookmarked);
@@ -357,6 +471,8 @@ const PostContent = ({ username, password }) => {
             { renderBookmarkButton() }
 
             { renderEditButton() }
+
+            { renderDeleteButton() }
 
           </Grid.Row>
         </Grid>
