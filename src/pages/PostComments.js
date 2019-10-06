@@ -84,7 +84,7 @@ const PostComments = ({ postId, username, password }) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ post_id: postId, filter: filterType })
+      body: JSON.stringify({ post_id: postId, filter: filterType, pageNumber: pageNumber })
     };
 
     console.log("TRUE FILTER TYPE:");
@@ -296,7 +296,38 @@ const PostComments = ({ postId, username, password }) => {
   if (commentList === undefined) {
     fetchCommentList(currentPage, filterType);
     return (
-      <h1>Put loader here later</h1>
+      <>
+        <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+          <Placeholder.Paragraph>
+            <Placeholder.Line length='full'/>
+            <Placeholder.Line length='very long'/>
+            <Placeholder.Line length='medium'/>
+            <Placeholder.Line length='long'/>
+            <Placeholder.Line length='short'/>
+            <Placeholder.Line length='very short'/>
+          </Placeholder.Paragraph>
+        </Placeholder>
+        <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+          <Placeholder.Paragraph>
+            <Placeholder.Line length='full'/>
+            <Placeholder.Line length='very long'/>
+            <Placeholder.Line length='medium'/>
+            <Placeholder.Line length='long'/>
+            <Placeholder.Line length='short'/>
+            <Placeholder.Line length='very short'/>
+          </Placeholder.Paragraph>
+        </Placeholder>
+        <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+          <Placeholder.Paragraph>
+            <Placeholder.Line length='full'/>
+            <Placeholder.Line length='very long'/>
+            <Placeholder.Line length='medium'/>
+            <Placeholder.Line length='long'/>
+            <Placeholder.Line length='short'/>
+            <Placeholder.Line length='very short'/>
+          </Placeholder.Paragraph>
+        </Placeholder>
+      </>
     );
   }
 
