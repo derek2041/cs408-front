@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
-
+import CommentActions from './CommentActions';
 var faker = require('faker');
 
 const sortOptions = [
@@ -67,12 +67,12 @@ const PostComments = ({ postId, username, password }) => {
       const result = await response.json();
 
       console.log(result);
+      window.location.reload();
 
     } catch (error) {
       console.log(error);
     }
 
-    window.location.reload();
   }
 
   const fetchCommentList = async (pageNumber, filterType) => {
@@ -171,8 +171,11 @@ const PostComments = ({ postId, username, password }) => {
             </Grid.Column>
 
             <Grid.Column>
-              { renderDeleteButton(comment["username"], comment["id"]) }
-              { renderEditButton(comment["username"], comment["id"], comment["content"]) }
+              <CommentActions key={ comment["id"] }
+                username={ username }
+                password= { password }
+                data={ comment }
+              />
             </Grid.Column>
           </Grid.Row>
           <Divider style={{ maxWidth: '90vw' }}/>
@@ -187,11 +190,20 @@ const PostComments = ({ postId, username, password }) => {
     if (inputUsername === username) {
       return (
         <>
-          <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
-            onClick={ () => { setShowDelete(true); }}
-          >
-            <Icon name='delete' />
-          </Button>
+          <Popup
+            content="Delete Comment"
+            mouseEnterDelay={500}
+            position='top center'
+            on='hover'
+            style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
+            trigger={
+              <Button icon style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+                onClick={ () => { setShowDelete(true); }}
+              >
+                <Icon name='delete' />
+              </Button>
+            }
+          />
 
           <Confirm
             content='Are you sure you want to delete this comment?'
@@ -211,6 +223,8 @@ const PostComments = ({ postId, username, password }) => {
 
   const saveEditedComment = async (commentId) => {
     var response;
+    console.log("FINAL EDIT COMMENT TEXT: " + editCommentText);
+    console.log("FINAL EDIT COMMENT ID: " + commentId);
 
     const settings = {
       method: 'POST',
@@ -227,17 +241,23 @@ const PostComments = ({ postId, username, password }) => {
 
       const result = await response.json();
 
-      // console.log(result);
+      console.log(result);
+      // window.location.reload();
 
     } catch (error) {
       console.log(error);
     }
 
-    window.location.reload();
   }
 
   const renderEditButton = (inputUsername, commentId, content) => {
+    const final_content = content;
+    // const final_id = commentId;
+
     if (inputUsername === username) {
+      console.log("INIT CONTENT: " + final_content);
+      console.log("INIT COMMENT ID: " + commentId);
+
       return (
         <>
           <Modal open={ modalVisible }
@@ -245,7 +265,6 @@ const PostComments = ({ postId, username, password }) => {
             dimmer="blurring"
             closeOnDimmerClick={ true }
             closeOnDocumentClick={ true }
-            onOpen={ () => { setEditCommentText(content); } }
             onClose={ () => { setModalVisible(false); setEditCommentText(""); } }
           >
             <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Edit Comment</Header>
@@ -254,18 +273,21 @@ const PostComments = ({ postId, username, password }) => {
               <Grid textAlign="center" columns={1}>
 
                 <Grid.Row>
-                  <TextArea id="content" placeholder='Edit Comment' defaultValue={ content } style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+                  <TextArea id="content" placeholder='Edit Comment' defaultValue={ final_content } style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
                    onChange={ handleEditTextChange } />
                 </Grid.Row>
 
                 <Divider />
 
                 <Grid.Row>
-                  <Button id="submit-post"
+                  <Button id="save-comment"
                     primary
                     disabled={ editCommentText === "" }
                     style={{ fontFamily: 'Raleway', width: '200px', fontSize: '18px' }}
-                    onClick={ () => { saveEditedComment(commentId, content) }}
+                    onClick={ () => {
+                      const final_id = commentId;
+                      saveEditedComment(final_id);
+                    }}
                   >
                     Save Comment
                   </Button>
@@ -280,7 +302,7 @@ const PostComments = ({ postId, username, password }) => {
             on='hover'
             style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
             trigger={
-              <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+              <Button icon style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
                 onClick={ () => { setModalVisible(true); } }>
                 <Icon name='edit' />
               </Button>
