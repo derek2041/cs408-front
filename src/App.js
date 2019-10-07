@@ -20,7 +20,6 @@ const App = () => {
     setSessionPassword(password);
     localStorage.setItem('gleam_username', username);
     localStorage.setItem('gleam_password', password);
-    window.location.reload();
   }
 
   return (

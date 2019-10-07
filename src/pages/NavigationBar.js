@@ -14,6 +14,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
     setLoginUsername("");
     setLoginPassword("");
     sessionUserCallback(null, null);
+    window.location.reload();
   }
 
   const authenticateUser = async () => {
@@ -48,6 +49,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       if (result && result.status === "success") {
         sessionUserCallback(loginUsername, loginPassword);
         setIsValidLogin(true);
+        window.location.reload();
       } else {
         sessionUserCallback(null, null);
         setIsValidLogin(false);
@@ -87,6 +89,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
       if (result && result.status === "success") {
         sessionUserCallback(loginUsername, loginPassword);
         setIsValidRegistration(true);
+        window.location.reload();
       } else {
         sessionUserCallback(null, null);
         setIsValidRegistration(false);
