@@ -4,7 +4,7 @@ import { Grid, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, 
 
 const CommentActions = ({ username, password, data }) => {
 
-  const [editCommentText, setEditCommentText] = useState("");
+  const [editCommentText, setEditCommentText] = useState(data["content"]);
   const [modalVisible, setModalVisible] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
