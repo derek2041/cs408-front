@@ -85,7 +85,7 @@ const CommentActions = ({ username, password, data }) => {
             closeOnDocumentClick={ true }
             onClose={ () => { setModalVisible(false); setEditCommentText(""); }}
           >
-            <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Edit Comment</Header>
+            <Header icon='edit' content='Edit Comment' style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }} />
 
             <Modal.Content>
               <Grid textAlign="center" columns={1}>

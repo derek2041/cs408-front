@@ -75,7 +75,7 @@ const HomePage = ({ username, password, isLoggedIn }) => {
       // sessionUserCallback(null, null);
       // setIsValidLogin(false);
     }
-    
+
     window.location.reload();
   }
 
@@ -103,7 +103,7 @@ const HomePage = ({ username, password, isLoggedIn }) => {
               </Button>
             }
           >
-            <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>New Post Submission</Header>
+            <Header icon='plus' content='New Post Submission' style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }} />
 
             <Modal.Content>
               <Grid textAlign="center" columns={1}>

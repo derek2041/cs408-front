@@ -173,11 +173,20 @@ const PostContent = ({ username, password }) => {
       if (isCreator === true) {
         return (
           <>
-            <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
-              onClick={ () => { setShowDelete(true); }}
-            >
-              <Icon name='delete' />
-            </Button>
+            <Popup
+              content="Delete Post"
+              mouseEnterDelay={500}
+              position='top center'
+              on='hover'
+              style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
+              trigger={
+                <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
+                  onClick={ () => { setShowDelete(true); }}
+                >
+                  <Icon name='delete' />
+                </Button>
+              }
+            />
 
             <Confirm
               content='Are you sure you want to delete this post?'
@@ -275,7 +284,7 @@ const PostContent = ({ username, password }) => {
               closeOnDocumentClick={ true }
               onClose={ () => { setModalVisible(false); } }
             >
-              <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Edit Post</Header>
+              <Header icon='edit' content='Edit Post' style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }} />
 
               <Modal.Content>
                 <Grid textAlign="center" columns={1}>
