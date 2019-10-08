@@ -7,6 +7,7 @@ const HomePage = ({ username, password, isLoggedIn }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [newPostTitle, updateNewPostTitle] = useState("");
   const [newPostText, updateNewPostText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [instanceKey, setInstanceKey] = useState(0);
   const handleReset = () => setInstanceKey(i => i + 1);
@@ -62,6 +63,8 @@ const HomePage = ({ username, password, isLoggedIn }) => {
         // sessionUserCallback(loginUsername, loginPassword);
         // setIsValidLogin(true);
         console.log(result);
+        setModalVisible(false);
+        handleReset();
         // window.location.href = "http://13.58.109.119:3000/my-posts/";
         // setPostList(result);
       } else {
@@ -76,7 +79,7 @@ const HomePage = ({ username, password, isLoggedIn }) => {
       // setIsValidLogin(false);
     }
 
-    window.location.reload();
+    // window.location.reload();
   }
 
   return (
@@ -92,16 +95,12 @@ const HomePage = ({ username, password, isLoggedIn }) => {
           />
 
           <Modal
+            open={ modalVisible }
+            closeOnDimmerClick={ true }
+            closeOnDocumentClick={ true }
+            onClose={ () => { setModalVisible(false) }}
             size="large"
             dimmer="blurring"
-            trigger={
-              <Button primary animated='fade' disabled={ isLoggedIn === false } style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px', minWidth: '125px', marginTop: '1.4%', marginLeft: '1.4%' }}>
-                <Button.Content visible>
-                  <Icon name='plus' />
-                </Button.Content>
-                <Button.Content hidden>New Post</Button.Content>
-              </Button>
-            }
           >
             <Header icon='plus' content='New Post Submission' style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }} />
 
@@ -130,6 +129,13 @@ const HomePage = ({ username, password, isLoggedIn }) => {
             </Modal.Content>
 
           </Modal>
+
+          <Button primary animated='fade' disabled={ isLoggedIn === false } onClick={ () => { setModalVisible(true) }} style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px', minWidth: '125px', marginTop: '1.4%', marginLeft: '1.4%' }}>
+            <Button.Content visible>
+              <Icon name='plus' />
+            </Button.Content>
+            <Button.Content hidden>New Post</Button.Content>
+          </Button>
         </Grid.Row>
       </Grid>
       <PostList key={instanceKey} pageType={"home"} searchQuery={searchQuery} username={""} password={""} />

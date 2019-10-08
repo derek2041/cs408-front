@@ -18,8 +18,8 @@ const PostContent = ({ username, password }) => {
     const [editedPostTitle, setEditedPostTitle] = useState("");
     const [editedPostText, setEditedPostText] = useState("");
 
-    // const [instanceKey, setInstanceKey] = useState(0);
-    // const handleReset = () => setInstanceKey(i => i + 1);
+    const [instanceKey, setInstanceKey] = useState(0);
+    const handleReset = () => setInstanceKey(i => i + 1);
 
     const postId = url.slice(url.lastIndexOf(':')+1);
 
@@ -59,7 +59,8 @@ const PostContent = ({ username, password }) => {
         console.log(error);
       }
 
-      window.location.href = "http://13.58.109.119:3000/";
+      window.history.back();
+      // window.location.href = "http://13.58.109.119:3000/";
     }
 
     const saveEditedPost = async () => {
@@ -84,12 +85,14 @@ const PostContent = ({ username, password }) => {
         const result = await response.json();
 
         console.log(result);
+        setModalVisible(false);
+        fetchPostBody(postId);
 
       } catch (error) {
         console.log(error);
       }
 
-      window.location.reload();
+      // window.location.reload();
     }
 
     const toggleBookmark = async () => {
@@ -402,8 +405,10 @@ const PostContent = ({ username, password }) => {
       const result = await response.json();
 
       console.log(result);
-
-      window.location.reload();
+      setNewCommentText("");
+      document.getElementById("content").value = "";
+      handleReset();
+      // window.location.reload();
     }
 
     // fetchPostBody(postId);
@@ -506,7 +511,7 @@ const PostContent = ({ username, password }) => {
           </Grid.Row>
         </Grid>
 
-        <PostComments postId={ postId } username={ username } password={ password } />
+        <PostComments key={ instanceKey } postId={ postId } username={ username } password={ password } />
       </>
     );
 }

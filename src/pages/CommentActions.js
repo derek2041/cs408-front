@@ -27,6 +27,7 @@ const CommentActions = ({ username, password, data, callback }) => {
       const result = await response.json();
 
       console.log(result);
+      setShowDelete(false);
       callback();
       // window.location.reload();
 
@@ -61,6 +62,7 @@ const CommentActions = ({ username, password, data, callback }) => {
       const result = await response.json();
 
       console.log(result);
+      setModalVisible(false);
       callback();
       // window.location.reload();
 
