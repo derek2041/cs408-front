@@ -23,6 +23,10 @@ const PostComments = ({ postId, username, password }) => {
   const [commentList, setCommentList] = useState(undefined);
   const [filterType, setFilterType] = useState("Most Recent");
 
+  const updateCallback = () => {
+    // setCommentList(undefined);
+    fetchCommentList(1, filterType);
+  }
 
   const handlePageChange = (event, data) => {
     if (data.totalPages === 0) {
@@ -151,6 +155,7 @@ const PostComments = ({ postId, username, password }) => {
                 username={ username }
                 password= { password }
                 data={ comment }
+                callback={ updateCallback }
               />
             </Grid.Column>
           </Grid.Row>

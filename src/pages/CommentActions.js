@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
 
 
-const CommentActions = ({ username, password, data }) => {
+const CommentActions = ({ username, password, data, callback }) => {
 
   const [editCommentText, setEditCommentText] = useState(data["content"]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,7 +27,8 @@ const CommentActions = ({ username, password, data }) => {
       const result = await response.json();
 
       console.log(result);
-      window.location.reload();
+      callback();
+      // window.location.reload();
 
     } catch (error) {
       console.log(error);
@@ -60,7 +61,8 @@ const CommentActions = ({ username, password, data }) => {
       const result = await response.json();
 
       console.log(result);
-      window.location.reload();
+      callback();
+      // window.location.reload();
 
     } catch (error) {
       console.log(error);
