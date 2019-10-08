@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
+import { Grid, Message, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
 import CommentActions from './CommentActions';
 var faker = require('faker');
 
@@ -22,10 +22,7 @@ const PostComments = ({ postId, username, password }) => {
   const [totalPages, setTotalPages] = useState(null);
   const [commentList, setCommentList] = useState(undefined);
   const [filterType, setFilterType] = useState("Most Recent");
-  const [showDelete, setShowDelete] = useState(false);
-  const [editCommentText, setEditCommentText] = useState("");
 
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePageChange = (event, data) => {
     if (data.totalPages === 0) {
@@ -36,10 +33,6 @@ const PostComments = ({ postId, username, password }) => {
     fetchCommentList(data.activePage, filterType);
   }
 
-  const handleEditTextChange = (event, data) => {
-    setEditCommentText(data.value);
-  }
-
   const handleFilterChange = (event, data) => {
     console.log("filter changed to:");
     console.log(data.value);
@@ -48,44 +41,27 @@ const PostComments = ({ postId, username, password }) => {
     fetchCommentList(1, data.value);
   }
 
-  const submitDelete = async (commentId) => {
-    var response;
-
-    const settings = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ comment_id: commentId, username: username, password: password })
-    };
-
-    try {
-      response = await fetch(
-        `http://13.58.109.119:3001/comments/delete`, settings
-      );
-
-      const result = await response.json();
-
-      console.log(result);
-      window.location.reload();
-
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-
   const fetchCommentList = async (pageNumber, filterType) => {
 
     var response;
 
-    const settings = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ post_id: postId, filter: filterType, pageNumber: pageNumber })
-    };
+    if (postId === -1) {
+      var settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: postId, filter: filterType, pageNumber: pageNumber, username: username, password: password })
+      };
+    } else {
+      var settings = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: postId, filter: filterType, pageNumber: pageNumber })
+      };
+    }
 
     console.log("TRUE FILTER TYPE:");
     console.log(filterType);
@@ -186,134 +162,6 @@ const PostComments = ({ postId, username, password }) => {
     return resultJSX;
   }
 
-  const renderDeleteButton = (inputUsername, commentId) => {
-    if (inputUsername === username) {
-      return (
-        <>
-          <Popup
-            content="Delete Comment"
-            mouseEnterDelay={500}
-            position='top center'
-            on='hover'
-            style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
-            trigger={
-              <Button icon style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
-                onClick={ () => { setShowDelete(true); }}
-              >
-                <Icon name='delete' />
-              </Button>
-            }
-          />
-
-          <Confirm
-            content='Are you sure you want to delete this comment?'
-            confirmButton='Yes'
-            cancelButton='No'
-            open={ showDelete === true }
-            onCancel={ () => { setShowDelete(false); } }
-            onConfirm={ () => { submitDelete(commentId) }}
-            style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
-          />
-        </>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  const saveEditedComment = async (commentId) => {
-    var response;
-    console.log("FINAL EDIT COMMENT TEXT: " + editCommentText);
-    console.log("FINAL EDIT COMMENT ID: " + commentId);
-
-    const settings = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username: username, password: password, comment_id: commentId, content: editCommentText })
-    };
-
-    try {
-      response = await fetch(
-        `http://13.58.109.119:3001/comments/edit`, settings
-      );
-
-      const result = await response.json();
-
-      console.log(result);
-      // window.location.reload();
-
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-
-  const renderEditButton = (inputUsername, commentId, content) => {
-    const final_content = content;
-    // const final_id = commentId;
-
-    if (inputUsername === username) {
-      console.log("INIT CONTENT: " + final_content);
-      console.log("INIT COMMENT ID: " + commentId);
-
-      return (
-        <>
-          <Modal open={ modalVisible }
-            size="large"
-            dimmer="blurring"
-            closeOnDimmerClick={ true }
-            closeOnDocumentClick={ true }
-            onClose={ () => { setModalVisible(false); setEditCommentText(""); } }
-          >
-            <Header style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }}>Edit Comment</Header>
-
-            <Modal.Content>
-              <Grid textAlign="center" columns={1}>
-
-                <Grid.Row>
-                  <TextArea id="content" placeholder='Edit Comment' defaultValue={ final_content } style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
-                   onChange={ handleEditTextChange } />
-                </Grid.Row>
-
-                <Divider />
-
-                <Grid.Row>
-                  <Button id="save-comment"
-                    primary
-                    disabled={ editCommentText === "" }
-                    style={{ fontFamily: 'Raleway', width: '200px', fontSize: '18px' }}
-                    onClick={ () => {
-                      const final_id = commentId;
-                      saveEditedComment(final_id);
-                    }}
-                  >
-                    Save Comment
-                  </Button>
-                </Grid.Row>
-              </Grid>
-            </Modal.Content>
-          </Modal>
-          <Popup
-            content="Edit Comment"
-            mouseEnterDelay={500}
-            position='top center'
-            on='hover'
-            style={{ fontFamily: 'Raleway', fontSize: '14px', fontWeight: '500', borderRadius: '50px' }}
-            trigger={
-              <Button icon style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
-                onClick={ () => { setModalVisible(true); } }>
-                <Icon name='edit' />
-              </Button>
-            }
-          />
-        </>
-      );
-    } else {
-      return null;
-    }
-  }
 
   if (commentList === undefined) {
     fetchCommentList(currentPage, filterType);
@@ -349,7 +197,44 @@ const PostComments = ({ postId, username, password }) => {
             <Placeholder.Line length='very short'/>
           </Placeholder.Paragraph>
         </Placeholder>
+        <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+          <Placeholder.Paragraph>
+            <Placeholder.Line length='full'/>
+            <Placeholder.Line length='very long'/>
+            <Placeholder.Line length='medium'/>
+            <Placeholder.Line length='long'/>
+            <Placeholder.Line length='short'/>
+            <Placeholder.Line length='very short'/>
+          </Placeholder.Paragraph>
+        </Placeholder>
+        <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+          <Placeholder.Paragraph>
+            <Placeholder.Line length='full'/>
+            <Placeholder.Line length='very long'/>
+            <Placeholder.Line length='medium'/>
+            <Placeholder.Line length='long'/>
+            <Placeholder.Line length='short'/>
+            <Placeholder.Line length='very short'/>
+          </Placeholder.Paragraph>
+        </Placeholder>
       </>
+    );
+  }
+
+  if (postId === -1 && commentList === null) {
+    return (
+      <Grid textAlign="center" columns={1}>
+        <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
+        <Grid.Row style={{ marginTop: '2.5%' }}>
+          <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
+            <Message.Header style={{ fontFamily: 'Raleway' }}>No Comments Found!</Message.Header>
+            <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+              This means you have not posted any comments on any posts yet.
+              Comments you post in the future will show up here!
+            </p>
+          </Message>
+        </Grid.Row>
+      </Grid>
     );
   }
 

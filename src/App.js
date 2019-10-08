@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import NoMatch from './NoMatch';
 import MyPosts from './pages/MyPosts';
 import MyBookmarks from './pages/MyBookmarks';
+import MyComments from './pages/MyComments';
 import PostContent from './pages/PostContent';
 // import logo from './logo.svg';
 import './App.css';
@@ -73,10 +74,7 @@ const App = () => {
               );
             } else {
               return (
-                <img
-                  src="https://s3-media2.fl.yelpcdn.com/bphoto/XRTwKMvLOFswl6bywAu92g/o.jpg"
-                  alt=""
-                />
+                <MyComments username={sessionUsername} password={sessionPassword} />
               );
             }
           }} />
