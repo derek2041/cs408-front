@@ -142,7 +142,7 @@ const PostComments = ({ postId, username, password }) => {
       var current = (
         <>
           <Grid.Row columns={4}>
-            <Grid.Column>
+            <Grid.Column style={{ minWidth: '35%' }} >
               <p style={{ textAlign: 'left', fontFamily: 'Raleway', fontSize: '20px', fontWeight: '500' }} onMouseOver={() => { updateViewCount(comment["id"]); }}>{comment["content"]}</p>
             </Grid.Column>
 
