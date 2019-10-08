@@ -168,7 +168,7 @@ const PostContent = ({ username, password }) => {
       if (username === null || username === "null") {
         return (
           <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
-            <Icon name='delete' />
+            <Icon name='trash alternate' />
           </Button>
         );
       }
@@ -186,7 +186,7 @@ const PostContent = ({ username, password }) => {
                 <Button icon style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
                   onClick={ () => { setShowDelete(true); }}
                 >
-                  <Icon name='delete' />
+                  <Icon name='trash alternate' />
                 </Button>
               }
             />
@@ -205,7 +205,7 @@ const PostContent = ({ username, password }) => {
       } else {
         return (
           <Button icon disabled style={{ height: 'max-content', fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}>
-            <Icon name='delete' />
+            <Icon name='trash alternate' />
           </Button>
         );
       }

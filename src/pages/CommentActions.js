@@ -151,7 +151,7 @@ const CommentActions = ({ username, password, data, callback }) => {
               <Button icon style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '18px' }}
                 onClick={ () => { setShowDelete(true) }}
               >
-                <Icon name='delete' />
+                <Icon name='trash alternate' />
               </Button>
             }
           />
