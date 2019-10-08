@@ -77,3 +77,9 @@ button {
 span[class="text"] {
   color: rgb(33, 133, 208);
 }
+
+textarea:disabled {
+  color: rgb(84, 84, 84);
+  cursor: default;
+  background-color: rgb(240, 240, 240);
+}

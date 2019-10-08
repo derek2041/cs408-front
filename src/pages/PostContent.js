@@ -466,6 +466,16 @@ const PostContent = ({ username, password }) => {
               <Placeholder.Line length='very short'/>
             </Placeholder.Paragraph>
           </Placeholder>
+          <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+            <Placeholder.Paragraph>
+              <Placeholder.Line length='full'/>
+              <Placeholder.Line length='very long'/>
+              <Placeholder.Line length='medium'/>
+              <Placeholder.Line length='long'/>
+              <Placeholder.Line length='short'/>
+              <Placeholder.Line length='very short'/>
+            </Placeholder.Paragraph>
+          </Placeholder>
         </>
       );
     }
@@ -496,8 +506,12 @@ const PostContent = ({ username, password }) => {
         <Grid textAlign="center" columns={1}>
           <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
           <Grid.Row>
-            <TextArea id="content" placeholder='New Comment...' style={{ maxWidth: '75%', minWidth: '75%', minHeight: '150px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
-             onChange={ handleTextChange } />
+            <TextArea
+              id="content"
+              disabled={ username === null || username === "null" }
+              placeholder='New Comment...'
+              style={{ maxWidth: '75%', minWidth: '75%', minHeight: '150px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+              onChange={ handleTextChange } />
           </Grid.Row>
 
           <Grid.Row>
