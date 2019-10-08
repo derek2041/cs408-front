@@ -16,12 +16,14 @@ input[type="text"] {
   font-family: 'Raleway' !important;
   font-weight: 500;
   border-radius: 50px !important;
+  border-color: darkgrey !important;
 }
 
 input[type="password"] {
   font-family: 'Raleway' !important;
   font-weight: 500;
   border-radius: 50px !important;
+  border-color: darkgrey !important;
 }
 
 .button.logout {
@@ -76,6 +78,10 @@ button {
 
 span[class="text"] {
   color: rgb(33, 133, 208);
+}
+
+textarea {
+  border-color: darkgrey;
 }
 
 textarea:disabled {
