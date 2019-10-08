@@ -11,10 +11,27 @@ import PostContent from './pages/PostContent';
 // import logo from './logo.svg';
 import './App.css';
 
+const getSessionInfo = (type) => {
+  if (type === "username") {
+    if (localStorage.getItem('gleam_username')) {
+      return localStorage.getItem('gleam_username');
+    } else {
+      return "null";
+    }
+  } else if (type === "password") {
+    if (localStorage.getItem('gleam_password')) {
+      return localStorage.getItem('gleam_password');
+    } else {
+      return "null";
+    }
+  }
+  return "null";
+}
+
 const App = () => {
 
-  const [sessionUsername, setSessionUsername] = useState(localStorage.getItem('gleam_username'));
-  const [sessionPassword, setSessionPassword] = useState(localStorage.getItem('gleam_password'));
+  const [sessionUsername, setSessionUsername] = useState(getSessionInfo("username"));
+  const [sessionPassword, setSessionPassword] = useState(getSessionInfo("password"));
 
   const sessionUserCallback = (username, password) => {
     setSessionUsername(username);
