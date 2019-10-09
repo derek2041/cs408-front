@@ -137,8 +137,9 @@ const PostComments = ({ postId, username, password }) => {
   }
 
   const renderComments = () => {
+    var resultJSX = [];
+
     if (postId === -1) {
-      var resultJSX = [];
       commentList.forEach((comment) => {
         var current = (
           <>
@@ -176,7 +177,6 @@ const PostComments = ({ postId, username, password }) => {
       });
       return resultJSX;
     } else {
-      var resultJSX = [];
       commentList.forEach((comment) => {
         var current = (
           <>
