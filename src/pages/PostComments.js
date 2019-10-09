@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Message, Placeholder, Divider, Pagination, Dropdown } from 'semantic-ui-react';
+import { Grid, Message, Placeholder, Divider, Pagination, Dropdown, Button, Icon } from 'semantic-ui-react';
 import CommentActions from './CommentActions';
 
 const sortOptions = [
@@ -137,34 +137,74 @@ const PostComments = ({ postId, username, password }) => {
   }
 
   const renderComments = () => {
-    var resultJSX = [];
-    commentList.forEach((comment) => {
-      var current = (
-        <>
-          <Grid.Row columns={4}>
-            <Grid.Column style={{ minWidth: '35%' }} >
-              <p style={{ textAlign: 'left', fontFamily: 'Raleway', fontSize: '20px', fontWeight: '500' }} onMouseOver={() => { updateViewCount(comment["id"]); }}>{comment["content"]}</p>
-            </Grid.Column>
+    if (postId === -1) {
+      var resultJSX = [];
+      commentList.forEach((comment) => {
+        var current = (
+          <>
+            <Grid.Row columns={5}>
+              <Grid.Column style={{ minWidth: '35%' }} >
+                <p style={{ textAlign: 'left', fontFamily: 'Raleway', fontSize: '20px', fontWeight: '500' }}>{comment["content"]}</p>
+              </Grid.Column>
 
-            <Grid.Column>
-              <p style={{ fontFamily: 'Raleway', fontSize: '20px' }}>{comment["comment_views"]} views</p>
-            </Grid.Column>
+              <Grid.Column style={{ maxWidth: '15%' }}>
+                <p style={{ fontFamily: 'Raleway', fontSize: '20px' }}>{comment["comment_views"]} views</p>
+              </Grid.Column>
 
-            <Grid.Column>
-              <CommentActions key={ comment["id"] }
-                username={ username }
-                password= { password }
-                data={ comment }
-                callback={ updateCallback }
-              />
-            </Grid.Column>
-          </Grid.Row>
-          <Divider style={{ maxWidth: '90vw' }}/>
-        </>
-      );
-      resultJSX.push(current);
-    });
-    return resultJSX;
+              <Grid.Column style={{ maxWidth: '15%', minWidth: 'max-content' }}>
+                <CommentActions key={ comment["id"] }
+                  username={ username }
+                  password= { password }
+                  data={ comment }
+                  callback={ updateCallback }
+                />
+              </Grid.Column>
+
+              <Grid.Column style={{ maxWidth: '15%' }}>
+                <Button onClick={ () => {window.location.href="/post-view/:" + comment["post_id"]} } animated style={{ fontSize: '18px', fontFamily: 'Raleway', fontWeight: '500', minWidth: '137px' }}>
+                  <Button.Content visible>
+                    <Icon name='arrow right' />
+                  </Button.Content>
+                  <Button.Content hidden>View Post</Button.Content>
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+            <Divider style={{ maxWidth: '90vw' }}/>
+          </>
+        );
+        resultJSX.push(current);
+      });
+      return resultJSX;
+    } else {
+      var resultJSX = [];
+      commentList.forEach((comment) => {
+        var current = (
+          <>
+            <Grid.Row columns={4}>
+              <Grid.Column style={{ minWidth: '50%' }} >
+                <p style={{ textAlign: 'left', fontFamily: 'Raleway', fontSize: '20px', fontWeight: '500' }} onMouseOver={() => { updateViewCount(comment["id"]); }}>{comment["content"]}</p>
+              </Grid.Column>
+
+              <Grid.Column style={{ maxWidth: '15%' }}>
+                <p style={{ fontFamily: 'Raleway', fontSize: '20px' }}>{comment["comment_views"]} views</p>
+              </Grid.Column>
+
+              <Grid.Column style={{ maxWidth: '15%', minWidth: 'max-content' }}>
+                <CommentActions key={ comment["id"] }
+                  username={ username }
+                  password= { password }
+                  data={ comment }
+                  callback={ updateCallback }
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Divider style={{ maxWidth: '90vw' }}/>
+          </>
+        );
+        resultJSX.push(current);
+      });
+      return resultJSX;
+    }
   }
 
 
