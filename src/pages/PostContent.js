@@ -487,7 +487,7 @@ const PostContent = ({ username, password }) => {
         <Grid textAlign="center" columns={1}>
           <Container id="post-content" text>
             <Header as='h2' style={{ marginTop: '3%', fontFamily: 'Raleway', color: 'rgb(33, 133, 208)' }}>{content.title}</Header>
-            <p style={{ marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px' }}>
+            <p style={{ marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px', whiteSpace: 'pre-wrap' }}>
               {content.content}
             </p>
           </Container>
