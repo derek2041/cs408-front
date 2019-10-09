@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
+import { Grid, Modal, TextArea, Popup, Header, Divider, Button, Icon, Confirm } from 'semantic-ui-react';
 
 
 const CommentActions = ({ username, password, data, callback }) => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, Message, Modal, TextArea, Popup, Header, Container, Placeholder, Divider, Pagination, Dropdown, Button, Icon, Confirm } from 'semantic-ui-react';
+import { Grid, Message, Placeholder, Divider, Pagination, Dropdown } from 'semantic-ui-react';
 import CommentActions from './CommentActions';
-var faker = require('faker');
 
 const sortOptions = [
   {
@@ -48,9 +47,10 @@ const PostComments = ({ postId, username, password }) => {
   const fetchCommentList = async (pageNumber, filterType) => {
 
     var response;
+    var settings;
 
     if (postId === -1) {
-      var settings = {
+      settings = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ const PostComments = ({ postId, username, password }) => {
         body: JSON.stringify({ post_id: postId, filter: filterType, pageNumber: pageNumber, username: username, password: password })
       };
     } else {
-      var settings = {
+      settings = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ const PostComments = ({ postId, username, password }) => {
 
       const result = await response.json();
 
-      // console.log(result);
+      console.log(result);
 
     } catch (error) {
       console.log(error);
