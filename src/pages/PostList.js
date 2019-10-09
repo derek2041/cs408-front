@@ -123,7 +123,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
             <Grid.Column>
               <Button onClick={ () => {window.location.href="/post-view/:" + post["id"]} } animated style={{ fontSize: '18px', fontFamily: 'Raleway', fontWeight: '500', minWidth: '137px' }}>
                 <Button.Content visible>
-                  <Icon name='arrow right' />
+                  <Icon name='angle double right' />
                 </Button.Content>
                 <Button.Content hidden>View Post</Button.Content>
               </Button>
@@ -206,8 +206,11 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
         <Divider style={{ width: '13337px', background: '#505359', borderBottom: '0px' }}/>
         <Grid.Row style={{ marginTop: '2.5%' }}>
           <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
-            <Message.Header style={{ fontFamily: 'Raleway' }}>No Posts Found!</Message.Header>
-            <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+            <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+              <Icon size='big' name='info circle' />
+              {"No Posts Found"}
+            </Message.Header>
+            <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
               This could mean one of three things: there are no posts that match your search query,
               your account has no submitted posts, or your account has no posts bookmarked!
             </p>

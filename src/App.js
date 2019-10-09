@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Message } from 'semantic-ui-react';
+import { Grid, Message, Icon } from 'semantic-ui-react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavigationBar from './pages/NavigationBar';
 import HomePage from './pages/HomePage';
@@ -60,8 +60,11 @@ const App = () => {
                 <Grid textAlign="center" columns={1}>
                   <Grid.Row style={{ marginTop: '2.5%' }}>
                     <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
-                      <Message.Header style={{ fontFamily: 'Raleway' }}>Login Required</Message.Header>
-                      <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                      <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                        <Icon size='big' name='info circle' />
+                        {"Login Required"}
+                      </Message.Header>
+                      <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
                         This feature requires you to be logged in. Please log in first.
                       </p>
                     </Message>
@@ -81,8 +84,11 @@ const App = () => {
                 <Grid textAlign="center" columns={1}>
                   <Grid.Row style={{ marginTop: '2.5%' }}>
                     <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
-                      <Message.Header style={{ fontFamily: 'Raleway' }}>Login Required</Message.Header>
-                      <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                      <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                        <Icon size='big' name='info circle' />
+                        {"Login Required"}
+                      </Message.Header>
+                      <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
                         This feature requires you to be logged in. Please log in first.
                       </p>
                     </Message>
@@ -102,8 +108,11 @@ const App = () => {
                 <Grid textAlign="center" columns={1}>
                   <Grid.Row style={{ marginTop: '2.5%' }}>
                     <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
-                      <Message.Header style={{ fontFamily: 'Raleway' }}>Login Required</Message.Header>
-                      <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                      <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                        <Icon size='big' name='info circle' />
+                        {"Login Required"}
+                      </Message.Header>
+                      <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
                         This feature requires you to be logged in. Please log in first.
                       </p>
                     </Message>

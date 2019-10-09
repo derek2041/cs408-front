@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Header, Container, Placeholder, TextArea, Divider, Button, Popup, Icon, Modal, Input, Confirm } from 'semantic-ui-react';
+import { Grid, Header, Message, Container, Placeholder, TextArea, Divider, Button, Popup, Icon, Modal, Input, Confirm } from 'semantic-ui-react';
 import PostComments from './PostComments';
 // import { Link } from 'react-router-dom';
 // import CommentList from './CommentList';
@@ -366,6 +366,11 @@ const PostContent = ({ username, password }) => {
 
         console.log(result);
 
+        if (result.status === 404) {
+          setContent(null);
+          return;
+        }
+
         setContent(result.post);
         setEditedPostTitle(result.post.title);
         setEditedPostText(result.post.content);
@@ -477,6 +482,25 @@ const PostContent = ({ username, password }) => {
             </Placeholder.Paragraph>
           </Placeholder>
         </>
+      );
+    }
+
+    if (content === null) {
+      return (
+        <Grid textAlign="center" columns={1}>
+          <Grid.Row style={{ marginTop: '2.5%' }}>
+            <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
+              <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                <Icon size='big' name='info circle' />
+                {"Post Not Found"}
+              </Message.Header>
+              <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
+                Oof! This post does not seem to exist. It may have been deleted by the original poster
+                or you may be searching for a post that has not been created yet.
+              </p>
+            </Message>
+          </Grid.Row>
+        </Grid>
       );
     }
 

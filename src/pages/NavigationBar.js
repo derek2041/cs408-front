@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Dropdown, Button, Modal, Header, Input, Grid, Message } from 'semantic-ui-react';
+import { Menu, Dropdown, Button, Modal, Header, Input, Grid, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const navbarStyle = { fontFamily: 'Raleway', width: '100%', height: '25%'};
@@ -137,15 +137,21 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
           <Grid textAlign="center" columns={1}>
             <Grid.Row style={{ marginTop: '2.5%' }}>
               <Message hidden={ isValidLogin } error={true} style={{ width: '80%', textAlign: 'center' }}>
-                <Message.Header style={{ fontFamily: 'Raleway' }}>Login Failed</Message.Header>
-                <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                  <Icon size='large' name='warning sign' />
+                  {"Login Failed"}
+                </Message.Header>
+                <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
                   There was an error trying to authenticate your credentials. Please try again.
                 </p>
               </Message>
 
               <Message hidden={ isValidRegistration } error={true} style={{ width: '80%', textAlign: 'center' }}>
-                <Message.Header style={{ fontFamily: 'Raleway' }}>Registration Failed</Message.Header>
-                <p style={{ fontFamily: 'Raleway', fontWeight: '600' }}>
+                <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                  <Icon size='large' name='warning sign' />
+                  {"Registration Failed"}
+                </Message.Header>
+                <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
                   There was an error trying to create an account with these credentials. Either the username
                   has already been taken or your password is less than 6 characters in length or your password
                   contains non-alphanumeric characters. Please try another combination!
