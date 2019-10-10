@@ -68,7 +68,7 @@ const ChangePassword = ({ username, sessionUserCallback }) => {
         </Grid.Row>
       </Grid>
 
-      <Grid id="change-password" textAlign="center" columns={2} style={{ marginLeft: '15%', marginRight: '15%' }}>
+      <Grid id="change-password" textAlign="center" columns={2} style={{ marginLeft: '12.7%' }}>
         <Grid.Row style={{ marginTop: '3%' }}>
           <p style={{ fontFamily: 'Raleway', fontSize: '20px', marginTop: '0.6%', marginRight: '3.8%', width: '200px' }}>Old Password:</p>
           <Input type="password" onChange={ (event, data) => { updateOldPassword(event, data); }} style={{ width: '35%', maxHeight: '45px', fontSize: '20px' }}/>
