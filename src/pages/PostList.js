@@ -113,7 +113,7 @@ const PostList = ({ pageType, searchQuery, username, password }) => {
         <>
           <Grid.Row columns={4}>
             <Grid.Column>
-              <p style={{ fontFamily: 'Raleway', fontSize: '28px' }}>{post["title"]}</p>
+              <p style={{ fontFamily: 'Raleway', fontSize: '28px', overflowWrap: 'break-word' }}>{post["title"]}</p>
             </Grid.Column>
 
             <Grid.Column>

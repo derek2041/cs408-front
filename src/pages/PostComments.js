@@ -145,7 +145,7 @@ const PostComments = ({ postId, username, password }) => {
           <>
             <Grid.Row columns={5}>
               <Grid.Column style={{ minWidth: '35%' }} >
-                <p style={{ textAlign: 'left', fontFamily: 'Raleway', fontSize: '20px', fontWeight: '500', whiteSpace: 'pre-wrap' }}>{comment["content"]}</p>
+                <p style={{ textAlign: 'left', fontFamily: 'Raleway', fontSize: '20px', fontWeight: '500', whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}>{comment["content"]}</p>
               </Grid.Column>
 
               <Grid.Column style={{ maxWidth: '15%' }}>

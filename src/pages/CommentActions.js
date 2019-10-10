@@ -95,7 +95,7 @@ const CommentActions = ({ username, password, data, callback }) => {
               <Grid textAlign="center" columns={1}>
 
                 <Grid.Row>
-                  <TextArea id="content" placeholder='Edit Comment' defaultValue={ final_content } style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+                  <TextArea id="content" maxLength="1000" placeholder='Edit Comment' defaultValue={ final_content } style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
                    onChange={ handleEditTextChange } />
                 </Grid.Row>
 

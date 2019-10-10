@@ -292,14 +292,14 @@ const PostContent = ({ username, password }) => {
               <Modal.Content>
                 <Grid textAlign="center" columns={1}>
                   <Grid.Row>
-                    <Input id="title" placeholder="Edit Post Title" defaultValue={content.title} style={{ width: '85%', maxHeight: '45px', fontSize: '20px' }}
+                    <Input id="title" maxLength="200" placeholder="Edit Post Title" defaultValue={content.title} style={{ width: '85%', maxHeight: '45px', fontSize: '20px' }}
                      onChange={ handleEditTitleChange }/>
                   </Grid.Row>
 
                   <Divider />
 
                   <Grid.Row>
-                    <TextArea id="content" placeholder='Edit Post Text' defaultValue={content.content} style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+                    <TextArea id="content" maxLength="4000" placeholder='Edit Post Text' defaultValue={content.content} style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
                      onChange={ handleEditTextChange } />
                   </Grid.Row>
 
@@ -510,8 +510,8 @@ const PostContent = ({ username, password }) => {
       <>
         <Grid textAlign="center" columns={1}>
           <Container id="post-content" text>
-            <Header as='h2' style={{ marginTop: '3%', fontFamily: 'Raleway', color: 'rgb(33, 133, 208)' }}>{content.title}</Header>
-            <p style={{ marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px', whiteSpace: 'pre-wrap' }}>
+            <Header as='h2' style={{ marginTop: '3%', fontFamily: 'Raleway', color: 'rgb(33, 133, 208)', overflowWrap: 'break-word' }}>{content.title}</Header>
+            <p style={{ marginBottom: '3%', fontFamily: 'Raleway', fontWeight: '500', fontSize: '18px', whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}>
               {content.content}
             </p>
           </Container>
@@ -532,6 +532,7 @@ const PostContent = ({ username, password }) => {
           <Grid.Row>
             <TextArea
               id="content"
+              maxLength="1000"
               disabled={ username === null || username === "null" }
               placeholder='New Comment...'
               style={{ maxWidth: '75%', minWidth: '75%', minHeight: '150px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}

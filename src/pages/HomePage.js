@@ -107,14 +107,14 @@ const HomePage = ({ username, password, isLoggedIn }) => {
             <Modal.Content>
               <Grid textAlign="center" columns={1}>
                 <Grid.Row>
-                  <Input id="title" placeholder="New Post Title" style={{ width: '85%', maxHeight: '45px', fontSize: '20px' }}
+                  <Input id="title" maxLength="200" placeholder="New Post Title" style={{ width: '85%', maxHeight: '45px', fontSize: '20px' }}
                    onChange={ handleTitleChange }/>
                 </Grid.Row>
 
                 <Divider />
 
                 <Grid.Row>
-                  <TextArea id="content" placeholder='New Post Text' style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
+                  <TextArea id="content" maxLength="4000" placeholder='New Post Text' style={{ maxWidth: '85%', minWidth: '85%', minHeight: '350px', fontFamily: 'Raleway', fontSize: '16px', padding: '20px', borderRadius: '25px' }}
                    onChange={ handleTextChange } />
                 </Grid.Row>
 
