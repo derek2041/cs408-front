@@ -262,6 +262,16 @@ const PostComments = ({ postId, username, password }) => {
             <Placeholder.Line length='very short'/>
           </Placeholder.Paragraph>
         </Placeholder>
+        <Placeholder fluid={true} style={{ marginTop: '3%', marginLeft: '10%', marginRight: '10%' }}>
+          <Placeholder.Paragraph>
+            <Placeholder.Line length='full'/>
+            <Placeholder.Line length='very long'/>
+            <Placeholder.Line length='medium'/>
+            <Placeholder.Line length='long'/>
+            <Placeholder.Line length='short'/>
+            <Placeholder.Line length='very short'/>
+          </Placeholder.Paragraph>
+        </Placeholder>
       </>
     );
   }

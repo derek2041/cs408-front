@@ -151,10 +151,11 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
                   <Icon size='large' name='warning sign' />
                   {"Registration Failed"}
                 </Message.Header>
-                <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
+                <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px', textAlign: 'left' }}>
                   There was an error trying to create an account with these credentials. Either the username
-                  has already been taken or your password is less than 6 characters in length or your password
-                  contains non-alphanumeric characters. Please try another combination!
+                  has already been taken, your password is less than 6 characters in length, your password
+                  contains non-alphanumeric characters, or your username/password contains spaces.<br/><br/>
+                  Please try another combination that satisfies these requirements!
                 </p>
               </Message>
             </Grid.Row>
@@ -173,17 +174,17 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
               </Grid.Row>
 
               <Grid.Row>
-                <Button primary disabled={ (loginUsername === "" || loginPassword === "" || loginUsername.includes(" ") || loginPassword.includes(" ")) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
+                <Button primary style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidRegistration(true); // this is to make the message disappear
                   authenticateUser();
                 }}
                 >
                   Login
                 </Button>
-                <Button disabled={ (loginUsername === "" || loginPassword === "" || loginUsername.includes(" ") || loginPassword.includes(" ")) } style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
+                <Button style={{ fontFamily: 'Raleway', width: '150px', fontSize: '18px' }} onClick={ () => {
                   setIsValidLogin(true);  // this is to make the message disappear
                   var regex = /[^a-zA-Z0-9]/g;
-                  if (loginPassword.length < 6 || loginPassword.match(regex)) {
+                  if (loginPassword.length < 6 || loginPassword.match(regex) || loginUsername.includes(" ")) {
                     setIsValidRegistration(false);
                   } else {
                     registerUser();
