@@ -8,6 +8,7 @@ import MyPosts from './pages/MyPosts';
 import MyBookmarks from './pages/MyBookmarks';
 import MyComments from './pages/MyComments';
 import PostContent from './pages/PostContent';
+import ChangePassword from './pages/ChangePassword';
 // import logo from './logo.svg';
 import './App.css';
 
@@ -126,13 +127,28 @@ const App = () => {
             }
           }} />
 
-          <Route path="/four/" exact render={ () => {
-            return (
-              <img
-                src="https://s3-media2.fl.yelpcdn.com/bphoto/nA9K90rczbClXXjxmM4Ezg/o.jpg"
-                alt=""
-              />
-            );
+          <Route path="/change-password/" exact render={ () => {
+            if (sessionUsername === null || sessionUsername === "null" || sessionPassword === null || sessionPassword === "null") {
+              return (
+                <Grid textAlign="center" columns={1}>
+                  <Grid.Row style={{ marginTop: '2.5%' }}>
+                    <Message warning={true} style={{ width: '80%', textAlign: 'center' }}>
+                      <Message.Header style={{ fontFamily: 'Raleway', fontSize: '18px' }}>
+                        <Icon size='big' name='info circle' />
+                        {"Login Required"}
+                      </Message.Header>
+                      <p style={{ fontFamily: 'Raleway', fontWeight: '600', fontSize: '16px' }}>
+                        This feature requires you to be logged in. Please log in first.
+                      </p>
+                    </Message>
+                  </Grid.Row>
+                </Grid>
+              );
+            } else {
+              return (
+                <ChangePassword username={sessionUsername} sessionUserCallback={ sessionUserCallback } />
+              );
+            }
           }} />
 
           <Route path="/" exact render={ () => {

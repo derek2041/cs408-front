@@ -164,12 +164,12 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
           <Modal.Content>
             <Grid textAlign="center" columns={2}>
               <Grid.Row>
-                <p style={{ fontFamily: 'Raleway', fontSize: '20px', marginTop: '0.6%', marginRight: '3%' }}>Username:</p>
+                <p style={{ fontFamily: 'Raleway', fontSize: '20px', marginTop: '0.6%', width: '140px'}}>Username:</p>
                 <Input onChange={ (event, data) => { updateLoginUser(event, data); }} style={{ width: '35%', maxHeight: '45px', fontSize: '20px' }}/>
               </Grid.Row>
 
               <Grid.Row>
-                <p style={{ fontFamily: 'Raleway', fontSize: '20px', marginTop: '0.6%', marginRight: '3.8%' }}>Password:</p>
+                <p style={{ fontFamily: 'Raleway', fontSize: '20px', marginTop: '0.6%', width: '140px'}}>Password:</p>
                 <Input type="password" onChange={ (event, data) => { updateLoginPassword(event, data); }} style={{ width: '35%', maxHeight: '45px', fontSize: '20px' }}/>
               </Grid.Row>
 
@@ -216,6 +216,7 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
             <Dropdown.Item as={ Link } to='/my-posts'>My Posts</Dropdown.Item>
             <Dropdown.Item as={ Link } to='/my-comments'>My Comments</Dropdown.Item>
             <Dropdown.Item as={ Link } to='/my-bookmarks'>My Bookmarks</Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/change-password'>Change Password</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
