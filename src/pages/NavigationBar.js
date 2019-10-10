@@ -213,10 +213,22 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
         { renderGreeting() }
         <Dropdown disabled={ (sessionUsername === null) || (sessionUsername === "null") } item text='My Profile'>
           <Dropdown.Menu>
-            <Dropdown.Item as={ Link } to='/my-posts'>My Posts</Dropdown.Item>
-            <Dropdown.Item as={ Link } to='/my-comments'>My Comments</Dropdown.Item>
-            <Dropdown.Item as={ Link } to='/my-bookmarks'>My Bookmarks</Dropdown.Item>
-            <Dropdown.Item as={ Link } to='/change-password'>Change Password</Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/my-posts'>
+              <Icon name='archive' />
+              My Posts
+            </Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/my-comments'>
+              <Icon name='comments' />
+              My Comments
+            </Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/my-bookmarks'>
+              <Icon name='bookmark' />
+              My Bookmarks
+            </Dropdown.Item>
+            <Dropdown.Item as={ Link } to='/change-password'>
+              <Icon name='cogs' />
+              Change Password
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
