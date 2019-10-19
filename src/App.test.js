@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import NavigationBar from './pages/NavigationBar';
+import PostList from './pages/PostList';
 import HomePage from './pages/HomePage';
-import { Button, Dropdown, Modal, Message } from 'semantic-ui-react';
+import { Button, Dropdown, Modal, Message, Pagination, Placeholder, Input} from 'semantic-ui-react';
 import { mount, render, shallow } from 'enzyme';
 
 /*
@@ -12,34 +13,108 @@ Instead, we test for behavior (like props).
 This is by nature of functional components vs. class components.
 */
 
-describe('<App /> with no login session', () => {
-  it('renders without crashing', () => {
+describe('Homepage with no login session', () => {
+  it('It renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it('renders without crashing (shallow)', () => {
+  it('It renders without crashing (shallow)', () => {
     shallow(<App />);
-  })
+  });
 
-  it('has null user session', () => {
+  it('By default it is a null user session', () => {
     const wrapper = mount(<App />);
     const navbar = wrapper.find(NavigationBar);
-    expect(navbar.prop('sessionUsername')).toBe(null);
-  })
+    expect(navbar.html().includes("Welcome")).toBeFalsy();
+  });
 
   it('My Profile is a disabled dropdown', () => {
     const wrapper = mount(<App />);
     const navbar = wrapper.find(NavigationBar);
     const dropdown = navbar.find(Dropdown);
     expect(dropdown.prop('disabled')).toBeTruthy();
-  })
+  });
 
-  it('create post button is disabled', () => {
+  it('The create post button is disabled', () => {
     const wrapper = mount(<App />);
     expect(wrapper.find(HomePage).find(Button).prop('disabled')).toBeTruthy();
-  })
+  });
+
+  it('Contains placeholders/loaders for posts', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.find(Placeholder)).toBeTruthy();
+  });
+
+  it('View post buttons are visible', async () => {
+    const wrapper = mount(<App />);
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(wrapper.find(PostList).html().includes("View Post")).toBeTruthy();
+  });
+
+  it('The postlist is rendered', async () => {
+    const wrapper = mount(<App />);
+    await new Promise((r) => setTimeout(r, 500));
+    expect(wrapper.find(PostList).html().includes("views")).toBeTruthy();
+  });
+
+  it('The pagination is rendered', async () => {
+    const wrapper = mount(<App />);
+    await new Promise((r) => setTimeout(r, 500));
+    expect(wrapper.find(PostList).find(Pagination)).toBeTruthy();
+  });
+
+  it('Posts have view counts', async () => {
+    const wrapper = mount(<App />);
+    await new Promise((r) => setTimeout(r, 500));
+    expect(wrapper.find(PostList).html().includes("views")).toBeTruthy();
+  });
+
+  it('Search bar is available', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.find(Input)).toBeTruthy();
+  });
+
+  it('New post button is shown', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.html().includes("New Post")).toBeTruthy();
+  });
+
+  it('Shows the sign in button', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.html().includes("Sign In")).toBeTruthy();
+  });
+
+  it('Opens the sign in modal on click', () => {
+    const wrapper = mount(<App />);
+    wrapper.find(Button).at(0).simulate('click');
+    expect(wrapper.find(Modal).at(0).html().includes("Account Login")).toBeTruthy();
+  });
+
+  it('Sign in modal contains username field', () => {
+    const wrapper = mount(<App />);
+    wrapper.find(Button).at(0).simulate('click');
+    expect(wrapper.find(Modal).at(0).html().includes("Username")).toBeTruthy();
+  });
+
+  it('Sign in modal contains password field', () => {
+    const wrapper = mount(<App />);
+    wrapper.find(Button).at(0).simulate('click');
+    expect(wrapper.find(Modal).at(0).html().includes("Password")).toBeTruthy();
+  });
+
+  it('Sign in modal contains Login button', () => {
+    const wrapper = mount(<App />);
+    wrapper.find(Button).at(0).simulate('click');
+    expect(wrapper.find(Button).at(0).html().includes("Login")).toBeTruthy();
+  });
+
+  it('Sign in modal contains Register button', () => {
+    const wrapper = mount(<App />);
+    wrapper.find(Button).at(0).simulate('click');
+    expect(wrapper.find(Button).at(1).html().includes("Register")).toBeTruthy();
+  });
 
   /*
   it('opens sign in modal', () => {
@@ -74,3 +149,23 @@ describe('<App /> with no login session', () => {
   //   // console.log(message);
   // })
 })
+
+// describe('Viewing a post', () => {
+//   it('Post view contains control options', async () => {
+//     Object.defineProperty(window.location, 'href', {
+//       writable: true,
+//       value: 'http://13.58.109.119:5000/post-view/:98'
+//     });
+//
+//     const wrapper = mount(<PostContent username={""} password={""} />);
+//     await new Promise((r) => setTimeout(r, 5000));
+//     // console.log(wrapper.debug());
+//     // console.log(wrapper.find(HomePage).find(PostList).html().includes(
+//     //   '<button class="ui icon disabled button" disabled="" tabindex="-1" style="height: max-content; font-family: Raleway; font-weight: 600; font-size: 18px;"><i aria-hidden="true" class="bookmark icon"></i></button>'
+//     // ));
+//     // wrapper.find(HomePage).find(PostList).find(Button).simulate('click');
+//     expect(wrapper.find(HomePage).find(PostList).html().includes(
+//       '<button class="ui icon disabled button" disabled="" tabindex="-1" style="height: max-content; font-family: Raleway; font-weight: 600; font-size: 18px;"><i aria-hidden="true" class="bookmark icon"></i></button>'
+//     )).toBeTruthy();
+//   });
+// })
