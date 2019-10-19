@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Menu, Dropdown, Button, Modal, Header, Input, Grid, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import logo from '../img/logo.png';
+
 const navbarStyle = { fontFamily: 'Raleway', width: '100%', height: '25%'};
 
 const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
@@ -207,7 +209,9 @@ const NavigationBar = ({ sessionUserCallback, sessionUsername }) => {
 
   return (
     <Menu size='massive' style={ navbarStyle }>
-      <Menu.Item header as={ Link } to='/'>Gleam</Menu.Item>
+      <Menu.Item header as={ Link } to='/'>
+        <img src={ logo } alt="" style={{ width: '120px' }} />
+      </Menu.Item>
 
       <Menu.Menu position='right'>
         { renderGreeting() }
