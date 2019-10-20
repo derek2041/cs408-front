@@ -24,7 +24,7 @@ const PostComments = ({ postId, username, password }) => {
 
   const updateCallback = () => {
     // setCommentList(undefined);
-    fetchCommentList(1, filterType);
+    fetchCommentList(currentPage, filterType);
   }
 
   const handlePageChange = (event, data) => {
