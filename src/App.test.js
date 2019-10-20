@@ -13,7 +13,7 @@ Instead, we test for behavior (like props).
 This is by nature of functional components vs. class components.
 */
 
-describe('Homepage with no login session', () => {
+describe('Smoke tests', () => {
   it('It renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
