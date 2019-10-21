@@ -12,6 +12,12 @@ import ChangePassword from './pages/ChangePassword';
 // import logo from './logo.svg';
 import './App.css';
 
+window.onpageshow = function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+};
+
 const getSessionInfo = (type) => {
   if (type === "username") {
     if (localStorage.getItem('gleam_username')) {
