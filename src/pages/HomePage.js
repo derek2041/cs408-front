@@ -65,6 +65,8 @@ const HomePage = ({ username, password, isLoggedIn }) => {
         console.log(result);
         setModalVisible(false);
         handleReset();
+        updateNewPostTitle("");
+        updateNewPostText("");
         // window.location.href = "http://13.58.109.119:3000/my-posts/";
         // setPostList(result);
       } else {
