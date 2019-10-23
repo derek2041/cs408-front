@@ -17,6 +17,8 @@ const PostContent = ({ username, password }) => {
 
     const [editedPostTitle, setEditedPostTitle] = useState("");
     const [editedPostText, setEditedPostText] = useState("");
+    const [defaultPostTitle, setDefaultPostTitle] = useState("");
+    const [defaultPostText, setDefaultPostText] = useState("");
 
     const [instanceKey, setInstanceKey] = useState(0);
     const handleReset = () => setInstanceKey(i => i + 1);
@@ -285,7 +287,7 @@ const PostContent = ({ username, password }) => {
               dimmer="blurring"
               closeOnDimmerClick={ true }
               closeOnDocumentClick={ true }
-              onClose={ () => { setModalVisible(false); } }
+              onClose={ () => { setModalVisible(false); setEditedPostTitle(defaultPostTitle); setEditedPostText(defaultPostText); } }
             >
               <Header icon='edit' content='Edit Post' style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }} />
 
@@ -374,6 +376,8 @@ const PostContent = ({ username, password }) => {
         setContent(result.post);
         setEditedPostTitle(result.post.title);
         setEditedPostText(result.post.content);
+        setDefaultPostTitle(result.post.title);
+        setDefaultPostText(result.post.content);
 
         setIsBookmarked(result.metadata.bookmarked);
         setIsCreator(result.metadata.creator);

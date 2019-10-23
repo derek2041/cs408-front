@@ -87,7 +87,7 @@ const CommentActions = ({ username, password, data, callback }) => {
             dimmer="blurring"
             closeOnDimmerClick={ true }
             closeOnDocumentClick={ true }
-            onClose={ () => { setModalVisible(false); }}
+            onClose={ () => { setModalVisible(false); setEditCommentText(final_content); }}
           >
             <Header icon='edit' content='Edit Comment' style={{ fontFamily: 'Raleway', fontSize: '24px', color: '#2185d0' }} />
 
